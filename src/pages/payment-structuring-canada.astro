@@ -1,0 +1,20 @@
+---
+import AuthorityBody from '~/components/sections/authority/AuthorityBody.astro';
+import AuthorityCTA from '~/components/sections/authority/AuthorityCTA.astro';
+import AuthorityHero from '~/components/sections/authority/AuthorityHero.astro';
+import AuthorityInsightLinks from '~/components/sections/authority/AuthorityInsightLinks.astro';
+import AuthorityRelatedTopics from '~/components/sections/authority/AuthorityRelatedTopics.astro';
+import { getAuthorityPage } from '~/data/authorityPages';
+import Layout from '~/layouts/PageLayout.astro';
+
+const page = getAuthorityPage('payment-structuring-canada');
+const metadata = { title: page.title, description: page.description };
+---
+
+<Layout metadata={metadata}>
+  <AuthorityHero page={page} />
+  <AuthorityBody paragraphs={page.body} />
+  <AuthorityRelatedTopics links={page.relatedTopics} />
+  <AuthorityInsightLinks links={page.insightLinks} />
+  <AuthorityCTA title={page.ctaTitle} text={page.ctaText} />
+</Layout>

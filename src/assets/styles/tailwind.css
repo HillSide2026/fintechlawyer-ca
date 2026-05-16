@@ -4,19 +4,31 @@
 
 @layer utilities {
   .bg-page {
-    background-color: var(--aw-color-bg-page);
+    background-color: rgb(var(--aw-color-bg-page));
   }
   .bg-dark {
-    background-color: var(--aw-color-bg-page-dark);
+    background-color: rgb(var(--aw-color-bg-page-dark));
   }
   .bg-light {
-    background-color: var(--aw-color-bg-page);
+    background-color: rgb(var(--aw-color-bg-page));
+  }
+  .bg-soft {
+    background-color: rgb(var(--aw-color-bg-soft));
+  }
+  .bg-brand-gradient {
+    background: var(--fl-gradient-brand);
   }
   .text-page {
-    color: var(--aw-color-text-page);
+    color: rgb(var(--aw-color-text-default));
   }
   .text-muted {
-    color: var(--aw-color-text-muted);
+    color: rgb(var(--aw-color-text-muted));
+  }
+  .text-subtle {
+    color: rgb(var(--aw-color-text-subtle));
+  }
+  .border-subtle {
+    border-color: rgb(var(--aw-color-border-subtle));
   }
 }
 

@@ -1,6 +1,6 @@
 ---
 publishDate: 2026-04-03T00:00:00Z
-title: 'Stripe MSB risk in Canada'
+title: 'MSB risk in Canadian payment structures'
 excerpt: 'How platforms should think about MSB risk, payment flows, and partner responsibilities in Canada.'
 category: Payments
 tags:

@@ -1,6 +1,6 @@
 ---
 publishDate: 2026-04-02T00:00:00Z
-title: 'FINTRAC penalties case study'
+title: 'FINTRAC enforcement case study'
 excerpt: 'How enforcement outcomes can inform fintech compliance design, governance, and operational evidence.'
 category: FINTRAC
 tags:

@@ -1,6 +1,6 @@
 ---
 publishDate: 2026-04-01T00:00:00Z
-title: 'MSB registration timeline in Canada'
+title: 'MSB registration timing and sequencing'
 excerpt: 'A practical primer on timing, sequencing, and common registration planning issues for Canadian MSB registration.'
 category: FINTRAC
 tags:

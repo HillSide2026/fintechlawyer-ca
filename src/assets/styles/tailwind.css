@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 100px;
+}
+
 @layer utilities {
   .bg-page {
     background-color: rgb(var(--aw-color-bg-page));

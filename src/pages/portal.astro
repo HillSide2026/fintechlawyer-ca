@@ -1,3 +1,518 @@
+---
+const portalTopics = [
+  {
+    id: 'payments-msb',
+    title: 'Payments and MSB registration',
+    overview:
+      'Payment businesses need to understand whether their activities trigger money services business registration, partner obligations, or payment flow risk.',
+    questions: [
+      'Who receives, controls, or transmits funds?',
+      'Does the product involve remittance, foreign exchange, virtual currency, or stored value?',
+      'Which partner is responsible for compliance controls?',
+    ],
+    risks: [
+      'Funds move before roles are documented',
+      'Customer facing terms do not match the actual payment flow',
+      'Banking or processor partners request regulatory evidence',
+    ],
+    documents: [
+      'Payment flow map',
+      'Partner and processor agreements',
+      'Customer terms',
+      'MSB registration checklist',
+    ],
+    counselTriggers: [
+      'Before launch of payment functionality',
+      'Before changing processor, bank, or settlement model',
+      'When a partner asks for MSB or AML documentation',
+    ],
+    links: [
+      { text: 'MSB risk', href: '/insights/stripe-msb-risk-canada' },
+      { text: 'MSB registration timing', href: '/insights/msb-registration-timeline-canada' },
+    ],
+  },
+  {
+    id: 'fintrac-compliance',
+    title: 'FINTRAC compliance',
+    overview:
+      'FINTRAC compliance requires more than registration. Policies, reporting, training, risk assessment, and operating evidence all matter.',
+    questions: [
+      'Does the business have a documented compliance program?',
+      'Who owns reporting, monitoring, and escalation?',
+      'Can the company show how controls work in practice?',
+    ],
+    risks: [
+      'Policies exist but are not operational',
+      'No documented risk assessment',
+      'Training, reporting, or review records are missing',
+    ],
+    documents: [
+      'Compliance policies',
+      'Risk assessment',
+      'Training records',
+      'Transaction monitoring notes',
+    ],
+    counselTriggers: [
+      'Before FINTRAC registration',
+      'After a material product or market change',
+      'When preparing for review, audit, or partner diligence',
+    ],
+    links: [
+      { text: 'FINTRAC enforcement', href: '/insights/fintrac-penalties-case-study' },
+      { text: 'FINTRAC compliance hub', href: '/archive/fintrac-compliance' },
+    ],
+  },
+  {
+    id: 'lending-credit',
+    title: 'Lending and credit products',
+    overview:
+      'Credit products can raise licensing, disclosure, servicing, assignment, privacy, and consumer protection issues depending on product design.',
+    questions: [
+      'Who is the lender of record?',
+      'Does the platform broker, originate, service, or market credit?',
+      'What disclosures does the borrower receive?',
+    ],
+    risks: [
+      'Borrower facing copy does not match lender and platform roles',
+      'Servicing obligations are unclear',
+      'Fees, rates, or repayment terms are not clearly disclosed',
+    ],
+    documents: [
+      'Credit product summary',
+      'Borrower disclosures',
+      'Lender or capital partner agreement',
+      'Servicing workflow',
+    ],
+    counselTriggers: [
+      'Before offering credit products',
+      'Before adding a lending partner',
+      'Before expanding into a new province, state, or country',
+    ],
+    links: [{ text: 'Lending compliance structures', href: '/insights/lending-compliance-structures' }],
+  },
+  {
+    id: 'investment-securities',
+    title: 'Investment and securities issues',
+    overview:
+      'Investment related products may raise registration, disclosure, marketing, suitability, referral, and custody questions.',
+    questions: [
+      'Does the product involve investment advice or recommendations?',
+      'Are users buying, holding, or accessing securities or investment products?',
+      'Who handles custody, onboarding, and suitability decisions?',
+    ],
+    risks: [
+      'Marketing language suggests advice or expected returns',
+      'Referral roles and compensation are not documented',
+      'Custody and user asset responsibilities are unclear',
+    ],
+    documents: [
+      'Product description',
+      'Marketing materials',
+      'Referral agreements',
+      'User onboarding flow',
+    ],
+    counselTriggers: [
+      'Before launching an investment related product',
+      'Before investor or partner diligence',
+      'Before adding referral or advisory features',
+    ],
+    links: [{ text: 'Investment platform readiness', href: '/insights/investment-platform-readiness' }],
+  },
+  {
+    id: 'insurance-distribution',
+    title: 'Insurance distribution',
+    overview:
+      'Insurance models need careful review of selling, referral, administration, compensation, licensing, and customer communication roles.',
+    questions: [
+      'Who sells, refers, or administers the insurance product?',
+      'How are customers introduced to coverage?',
+      'Who receives compensation and for what activity?',
+    ],
+    risks: [
+      'Customer experience looks like a sale without clear licensing analysis',
+      'Compensation flows are not documented',
+      'Partner responsibilities are split across multiple agreements',
+    ],
+    documents: [
+      'Customer journey',
+      'Carrier or broker agreements',
+      'Compensation terms',
+      'Product disclosure materials',
+    ],
+    counselTriggers: [
+      'Before embedding insurance into a fintech product',
+      'Before changing partner roles',
+      'Before marketing insurance related features',
+    ],
+    links: [{ text: 'Insurance distribution risk', href: '/insights/insurance-distribution-risk' }],
+  },
+  {
+    id: 'embedded-finance',
+    title: 'Embedded finance',
+    overview:
+      'Embedded finance products depend on clear partner roles, customer disclosures, platform responsibilities, data use, and risk allocation.',
+    questions: [
+      'Which regulated partner provides the financial product?',
+      'What does the platform do in the customer journey?',
+      'Who owns compliance, complaints, data, and customer communications?',
+    ],
+    risks: [
+      'Platform role expands beyond the agreement',
+      'Customer disclosures do not identify the regulated provider',
+      'Operational responsibilities are spread across informal processes',
+    ],
+    documents: [
+      'Partner role map',
+      'Customer disclosures',
+      'Platform agreement',
+      'Operational responsibility matrix',
+    ],
+    counselTriggers: [
+      'Before embedding a regulated product',
+      'Before changing customer flow or branding',
+      'Before adding new jurisdictions or product lines',
+    ],
+    links: [{ text: 'Fintech infrastructure agreements', href: '/insights/fintech-infrastructure-agreements' }],
+  },
+  {
+    id: 'crypto-web3',
+    title: 'Crypto/Web3',
+    overview:
+      'Crypto and Web3 products need analysis of token design, custody, trading, payments, marketing, AML, and securities risk.',
+    questions: [
+      'What function does the token or digital asset perform?',
+      'Who controls custody, wallets, or transfer activity?',
+      'Does the product involve exchange, brokerage, staking, or yield?',
+    ],
+    risks: [
+      'Token utility is unclear or changes over time',
+      'Custody and control responsibilities are not documented',
+      'Marketing language creates investment expectations',
+    ],
+    documents: [
+      'Token or product description',
+      'Wallet and custody model',
+      'Terms of use',
+      'AML and risk controls',
+    ],
+    counselTriggers: [
+      'Before token launch',
+      'Before adding custody, exchange, or yield features',
+      'Before public marketing or fundraising',
+    ],
+    links: [{ text: 'Blog', href: '/blog' }],
+  },
+  {
+    id: 'partnership-agreements',
+    title: 'Partnership agreements',
+    overview:
+      'Fintech partnership agreements should clearly allocate product responsibilities, compliance duties, data rights, economics, liability, and exit rights.',
+    questions: [
+      'What does each party actually do?',
+      'Who owns compliance, support, complaints, and reporting?',
+      'What happens if the product, partner, or law changes?',
+    ],
+    risks: [
+      'The agreement does not match the operating model',
+      'Compliance obligations are vague or one sided',
+      'Termination rights threaten business continuity',
+    ],
+    documents: [
+      'Draft partner agreement',
+      'Service levels',
+      'Data sharing terms',
+      'Risk allocation summary',
+    ],
+    counselTriggers: [
+      'Before signing a strategic partner agreement',
+      'Before relying on a partner for regulated activity',
+      'Before renegotiating economics or risk allocation',
+    ],
+    links: [{ text: 'Fintech infrastructure agreements', href: '/insights/fintech-infrastructure-agreements' }],
+  },
+  {
+    id: 'corporate-fundraising',
+    title: 'Corporate structure and fundraising',
+    overview:
+      'Corporate records, ownership structure, financing documents, and governance practices become more important as fintech companies scale.',
+    questions: [
+      'Are corporate records current and complete?',
+      'Does the ownership structure match financing and incentive plans?',
+      'Are approvals, consents, and founder arrangements documented?',
+    ],
+    risks: [
+      'Cap table and corporate records do not match',
+      'Founder, advisor, or contractor equity is undocumented',
+      'Financing documents are prepared without regulatory context',
+    ],
+    documents: [
+      'Minute book and corporate records',
+      'Cap table',
+      'SAFE or financing documents',
+      'Board and shareholder approvals',
+    ],
+    counselTriggers: [
+      'Before fundraising',
+      'Before diligence or acquisition discussions',
+      'Before issuing equity, options, or advisor grants',
+    ],
+    links: [{ text: 'Blog', href: '/blog' }],
+  },
+];
+
+const discoverySteps = [
+  {
+    title: '1. Product layer',
+    description: 'Select the product layers that apply.',
+    options: [
+      {
+        label: 'Payments, money movement, or stored value',
+        topics: ['payments-msb', 'fintrac-compliance', 'partnership-agreements'],
+        risk: 'Payment functionality may require MSB, AML, and partner role analysis.',
+        next: 'Prepare a payment flow map and identify all bank, processor, and platform roles.',
+      },
+      {
+        label: 'Lending, credit, or financing product',
+        topics: ['lending-credit', 'partnership-agreements', 'corporate-fundraising'],
+        risk: 'Credit products can raise licensing, disclosure, servicing, and consumer protection issues.',
+        next: 'Document the lender of record, borrower journey, fees, disclosures, and servicing model.',
+      },
+      {
+        label: 'Investment, securities, or capital markets product',
+        topics: ['investment-securities', 'corporate-fundraising', 'partnership-agreements'],
+        risk: 'Investment products may raise registration, marketing, custody, and referral questions.',
+        next: 'Collect product materials, marketing copy, investor flow, and partner agreements.',
+      },
+      {
+        label: 'Insurance or embedded coverage',
+        topics: ['insurance-distribution', 'embedded-finance', 'partnership-agreements'],
+        risk: 'Insurance distribution needs review of sales, referral, licensing, and compensation roles.',
+        next: 'Map the customer journey and identify who sells, refers, administers, and receives compensation.',
+      },
+      {
+        label: 'Crypto, token, wallet, or Web3 product',
+        topics: ['crypto-web3', 'fintrac-compliance', 'investment-securities'],
+        risk: 'Crypto products can raise AML, custody, trading, token, and securities issues.',
+        next: 'Prepare a token or asset description, custody model, transfer flow, and user terms.',
+      },
+      {
+        label: 'Embedded finance or infrastructure platform',
+        topics: ['embedded-finance', 'partnership-agreements', 'payments-msb'],
+        risk: 'Embedded finance depends on clear partner roles, customer disclosures, and risk allocation.',
+        next: 'Create a partner role map and list each compliance, customer, data, and support responsibility.',
+      },
+    ],
+  },
+  {
+    title: '2. Operational activity',
+    description: 'Select what the product actually does.',
+    options: [
+      {
+        label: 'Moves, receives, holds, or settles funds',
+        topics: ['payments-msb', 'fintrac-compliance'],
+        risk: 'Control or movement of funds is a core trigger for payment and AML analysis.',
+        next: 'Prepare a flow of funds diagram and identify who controls funds at each step.',
+      },
+      {
+        label: 'Uses banks, processors, lenders, brokers, carriers, or other regulated partners',
+        topics: ['partnership-agreements', 'embedded-finance'],
+        risk: 'Regulated partner models need clear allocation of product, compliance, and customer obligations.',
+        next: 'Review partner contracts against the actual operating model and customer experience.',
+      },
+      {
+        label: 'Collects sensitive personal, financial, or transaction data',
+        topics: ['embedded-finance', 'partnership-agreements'],
+        risk: 'Data collection can affect privacy, vendor, security, and customer disclosure obligations.',
+        next: 'List data collected, purposes, vendors, access rights, retention periods, and customer notices.',
+      },
+      {
+        label: 'Markets across provinces, states, or countries',
+        topics: ['payments-msb', 'lending-credit', 'investment-securities', 'insurance-distribution'],
+        risk: 'Cross-border activity can change licensing, disclosure, privacy, and consumer obligations.',
+        next: 'Identify active and planned jurisdictions, customer locations, and partner coverage.',
+      },
+      {
+        label: 'Raises capital or prepares for diligence',
+        topics: ['corporate-fundraising', 'investment-securities', 'partnership-agreements'],
+        risk: 'Diligence often exposes gaps in records, agreements, approvals, and regulatory positioning.',
+        next: 'Gather corporate records, cap table, financing documents, key contracts, and regulatory materials.',
+      },
+    ],
+  },
+  {
+    title: '3. Business stage',
+    description: 'Select the current business moment.',
+    options: [
+      {
+        label: 'Idea or pre-launch',
+        topics: ['corporate-fundraising', 'partnership-agreements'],
+        risk: 'Early structure decisions can shape launch speed, partner readiness, and regulatory exposure.',
+        next: 'Start with product classification, structure, partner role mapping, and customer terms.',
+      },
+      {
+        label: 'Launched and growing',
+        topics: ['payments-msb', 'fintrac-compliance', 'partnership-agreements'],
+        risk: 'Operational growth can outpace policies, agreements, and regulatory assumptions.',
+        next: 'Review whether current records, controls, agreements, and disclosures match live operations.',
+      },
+      {
+        label: 'Fundraising or partner diligence',
+        topics: ['corporate-fundraising', 'partnership-agreements', 'investment-securities'],
+        risk: 'Investors and partners may focus on governance, contracts, compliance evidence, and risk allocation.',
+        next: 'Prepare a diligence folder with corporate records, key agreements, policies, and product summaries.',
+      },
+      {
+        label: 'Entering a new market',
+        topics: ['payments-msb', 'lending-credit', 'insurance-distribution', 'investment-securities'],
+        risk: 'New markets can create local licensing, disclosure, privacy, and consumer protection requirements.',
+        next: 'Compare the target market against product activity, user location, partner coverage, and launch timing.',
+      },
+      {
+        label: 'Regulatory, bank, or partner inquiry',
+        topics: ['fintrac-compliance', 'payments-msb', 'partnership-agreements'],
+        risk: 'External inquiries often require organized evidence, clear explanations, and consistent documentation.',
+        next: 'Collect the inquiry, product summary, compliance materials, contracts, transaction flow, and response timeline.',
+      },
+    ],
+  },
+];
+
+const resourceLibrary = [
+  {
+    title: 'Payment flow map',
+    type: 'Checklist',
+    framework: 'payments-msb',
+    stage: 'Pre-launch',
+    description: 'A structured worksheet for identifying who receives, controls, moves, and settles funds.',
+    href: '/insights/stripe-msb-risk-canada',
+  },
+  {
+    title: 'MSB registration timing guide',
+    type: 'Guide',
+    framework: 'payments-msb',
+    stage: 'Launch',
+    description: 'A planning resource for sequencing MSB registration, compliance work, and partner expectations.',
+    href: '/insights/msb-registration-timeline-canada',
+  },
+  {
+    title: 'FINTRAC enforcement review',
+    type: 'Case note',
+    framework: 'fintrac-compliance',
+    stage: 'Growth',
+    description: 'A review of enforcement themes that can inform compliance design and operating evidence.',
+    href: '/insights/fintrac-penalties-case-study',
+  },
+  {
+    title: 'Lending role matrix',
+    type: 'Checklist',
+    framework: 'lending-credit',
+    stage: 'Pre-launch',
+    description: 'A worksheet for mapping lender, broker, servicer, platform, and borrower-facing roles.',
+    href: '/insights/lending-compliance-structures',
+  },
+  {
+    title: 'Investment platform readiness note',
+    type: 'Guide',
+    framework: 'investment-securities',
+    stage: 'Diligence',
+    description: 'A resource for reviewing disclosures, marketing, custody, referral, and governance issues.',
+    href: '/insights/investment-platform-readiness',
+  },
+  {
+    title: 'Insurance distribution issue list',
+    type: 'Checklist',
+    framework: 'insurance-distribution',
+    stage: 'Launch',
+    description: 'A reference list for sales, referral, compensation, licensing, and customer communication roles.',
+    href: '/insights/insurance-distribution-risk',
+  },
+  {
+    title: 'Embedded finance partner map',
+    type: 'Worksheet',
+    framework: 'embedded-finance',
+    stage: 'Pre-launch',
+    description: 'A structured map for regulated partner roles, customer disclosures, data use, and support ownership.',
+    href: '/insights/fintech-infrastructure-agreements',
+  },
+  {
+    title: 'Crypto product classification prompt',
+    type: 'Intake prompt',
+    framework: 'crypto-web3',
+    stage: 'Pre-launch',
+    description: 'A prompt set for token function, custody, transfer, trading, marketing, and AML analysis.',
+    href: '/blog',
+  },
+  {
+    title: 'Partnership agreement review checklist',
+    type: 'Checklist',
+    framework: 'partnership-agreements',
+    stage: 'Diligence',
+    description: 'A review checklist for compliance duties, data rights, liability, economics, service levels, and exit rights.',
+    href: '/insights/fintech-infrastructure-agreements',
+  },
+  {
+    title: 'Corporate records readiness list',
+    type: 'Checklist',
+    framework: 'corporate-fundraising',
+    stage: 'Diligence',
+    description: 'A list of records, approvals, ownership documents, and financing materials to gather before diligence.',
+    href: '/blog',
+  },
+];
+
+const contentPriorities = [
+  {
+    title: 'Payments and MSB readiness',
+    status: 'Published foundation',
+    focus: 'MSB registration, payment flows, partner roles, and operating evidence.',
+  },
+  {
+    title: 'FINTRAC compliance',
+    status: 'Published foundation',
+    focus: 'AML program structure, risk assessment, training, reporting, and enforcement signals.',
+  },
+  {
+    title: 'Partnership agreements',
+    status: 'Published foundation',
+    focus: 'Compliance obligations, data rights, liability, economics, continuity, and exit rights.',
+  },
+  {
+    title: 'Corporate structure and fundraising',
+    status: 'Published foundation',
+    focus: 'Corporate records, approvals, ownership, investor documents, and diligence readiness.',
+  },
+  {
+    title: 'Lending and credit products',
+    status: 'Published foundation',
+    focus: 'Lender roles, borrower disclosures, servicing, licensing, and consumer protection.',
+  },
+  {
+    title: 'Embedded finance',
+    status: 'Published foundation',
+    focus: 'Regulated partners, customer disclosures, data use, platform duties, and risk allocation.',
+  },
+  {
+    title: 'Investment and securities issues',
+    status: 'Published foundation',
+    focus: 'Registration, marketing, custody, referral arrangements, and investor flows.',
+  },
+  {
+    title: 'Insurance distribution',
+    status: 'Published foundation',
+    focus: 'Sales, referral, administration, compensation, licensing, and customer communication.',
+  },
+  {
+    title: 'Crypto/Web3',
+    status: 'Published foundation',
+    focus: 'Token function, custody, transfer activity, AML, marketing, and securities exposure.',
+  },
+];
+
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL || '';
+const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || '';
+const portalNotificationEndpoint = import.meta.env.PUBLIC_PORTAL_NOTIFICATION_ENDPOINT || '';
+---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -51,37 +566,70 @@
       .border-\[\#1D4771\] {
         border-color: #1D4771;
       }
+
+      .portal-locked .portal-shell {
+        display: none;
+      }
+
+      .hidden {
+        display: none;
+      }
     </style>
   </head>
-  <body class="bg-[#FAFAF9] text-[#2E2E2E]" style="font-family: 'Source Sans Pro', sans-serif;">
-    <div class="min-h-screen lg:flex">
+  <body class="portal-locked bg-[#FAFAF9] text-[#2E2E2E]" style="font-family: 'Source Sans Pro', sans-serif;">
+    <div id="portal-auth-gate" class="min-h-screen flex items-center justify-center px-6">
+      <div class="max-w-lg bg-white border border-[#D1D5DB] rounded-lg p-6 shadow">
+        <p class="uppercase tracking-loose text-[#78716C] text-xs mb-2">Portal access</p>
+        <h1 class="text-3xl font-bold mb-3">Checking portal session</h1>
+        <p id="portal-auth-gate-message" class="text-[#57534E] mb-5">
+          Confirming your Fintech Lawyer portal session.
+        </p>
+        <a class="inline-block bg-[#1D4771] text-white font-bold rounded-full py-3 px-6 shadow no-underline hover:underline" href="/login">
+          Go to login
+        </a>
+      </div>
+    </div>
+
+    <div class="portal-shell min-h-screen lg:flex">
       <aside class="bg-white border-r border-[#D1D5DB] lg:w-72">
         <div class="border-b border-[#D1D5DB] px-6 py-5">
           <a class="text-[#1D4771] no-underline hover:no-underline font-bold text-2xl" href="/tailwindtoolbox-landing-page">
             Fintech Lawyer
           </a>
-          <p class="text-[#78716C] text-sm mt-1">Education Portal</p>
+          <p class="text-[#78716C] text-sm mt-1">Knowledge Portal</p>
         </div>
 
         <nav class="px-4 py-5">
           <p class="uppercase tracking-loose text-[#78716C] text-xs px-2 mb-3">Portal</p>
           <a class="block rounded border border-[#1D4771] bg-[#DDEAF6] text-[#1D4771] font-bold no-underline px-4 py-3 mb-2" href="#">
-            Dashboard
+            Overview
           </a>
-          <a class="block rounded text-[#57534E] hover:text-[#0365B2] no-underline px-4 py-3 mb-2" href="#">
-            Discovery Path
+          <a class="block rounded text-[#57534E] hover:text-[#0365B2] no-underline px-4 py-3 mb-2" href="#discovery-flow">
+            Discovery
           </a>
-          <a class="block rounded text-[#57534E] hover:text-[#0365B2] no-underline px-4 py-3 mb-2" href="#">
+          <a class="block rounded text-[#57534E] hover:text-[#0365B2] no-underline px-4 py-3 mb-2" href="#topic-library">
             Topics
           </a>
-          <a class="block rounded text-[#57534E] hover:text-[#0365B2] no-underline px-4 py-3 mb-2" href="#">
-            Resources
+          <a class="block rounded text-[#57534E] hover:text-[#0365B2] no-underline px-4 py-3 mb-2" href="#resource-library">
+            Field Resources
           </a>
-          <a class="block rounded text-[#57534E] hover:text-[#0365B2] no-underline px-4 py-3 mb-2" href="#">
-            Product
+          <a class="block rounded text-[#57534E] hover:text-[#0365B2] no-underline px-4 py-3 mb-2" href="#saved-items">
+            Saved
           </a>
-          <a class="block rounded text-[#57534E] hover:text-[#0365B2] no-underline px-4 py-3" href="#">
-            Contact
+          <a class="block rounded text-[#57534E] hover:text-[#0365B2] no-underline px-4 py-3 mb-2" href="#request-help">
+            Requests
+          </a>
+          <a class="admin-only hidden block rounded text-[#57534E] hover:text-[#0365B2] no-underline px-4 py-3 mb-2" href="#admin-view">
+            Admin
+          </a>
+          <a class="block rounded text-[#57534E] hover:text-[#0365B2] no-underline px-4 py-3 mb-2" href="#portal-map">
+            Infrastructure
+          </a>
+          <a class="block rounded text-[#57534E] hover:text-[#0365B2] no-underline px-4 py-3 mb-2" href="#content-roadmap">
+            Roadmap
+          </a>
+          <a class="block rounded text-[#57534E] hover:text-[#0365B2] no-underline px-4 py-3" href="#portal-consultation">
+            Connect
           </a>
         </nav>
       </aside>
@@ -90,130 +638,537 @@
         <header class="bg-white border-b border-[#D1D5DB] px-6 py-4">
           <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
-              <p class="uppercase tracking-loose text-[#78716C] text-xs">Post-login portal</p>
-              <h1 class="text-3xl font-bold leading-tight">Welcome to Portal</h1>
+              <p class="uppercase tracking-loose text-[#78716C] text-xs">Legal Infrastructure Platform</p>
+              <h1 class="text-3xl font-bold leading-tight">Legal Readiness System</h1>
+              <p class="text-[#57534E] mt-2 max-w-3xl">
+                Identify structural, regulatory, and operational gaps in your model.
+              </p>
             </div>
-            <a class="inline-block bg-[#1D4771] text-white font-bold rounded-full py-3 px-6 shadow no-underline hover:underline" href="#">
-              Request consultation
+            <a class="inline-block bg-[#1D4771] text-white font-bold rounded-full py-3 px-6 shadow no-underline hover:underline" href="#request-help">
+              Speak with counsel
             </a>
+            <div class="flex flex-col gap-2 md:items-end">
+              <p id="portal-user-label" class="text-[#57534E] text-sm">Signed in</p>
+              <button id="portal-logout" class="border border-[#D1D5DB] rounded-full px-4 py-2 text-[#2E2E2E] bg-white hover:underline" type="button">
+                Sign out
+              </button>
+            </div>
           </div>
         </header>
 
         <main class="px-6 py-8">
-          <section class="mb-8">
-            <div class="bg-white border border-[#D1D5DB] rounded-lg shadow p-6">
-              <div class="max-w-3xl">
-                <p class="uppercase tracking-loose text-[#57534E] text-sm mb-3">Fintech Education Portal</p>
-                <h2 class="text-4xl font-bold leading-tight mb-4">Build legal readiness with a guided path.</h2>
-                <p class="text-[#57534E] text-lg">
-                  Learn about global fintech law topics, follow a practical discovery path, save useful resources, and request help when you are ready.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section class="mb-8">
-            <div class="bg-white border border-[#D1D5DB] rounded-lg p-5">
-              <p class="font-bold mb-2">Needs attention</p>
-              <p class="text-[#57534E]">
-                Complete the discovery checklist so the portal can recommend topics, resources, and next steps that fit your fintech business.
+          <section class="mb-6">
+            <article class="bg-white border border-[#D1D5DB] rounded-lg shadow p-6">
+              <h2 class="text-2xl font-bold mb-3">Continue assessment</h2>
+              <p class="text-[#57534E] mb-5 max-w-3xl">
+                Map your product, activity, and stage to surface relevant legal signals.
               </p>
-            </div>
-          </section>
-
-          <section class="grid gap-5 lg:grid-cols-3 mb-8">
-            <article class="bg-white border border-[#D1D5DB] rounded-lg shadow p-5">
-              <p class="uppercase tracking-loose text-[#78716C] text-xs mb-2">Progress</p>
-              <h3 class="text-2xl font-bold mb-2">Discovery path</h3>
-              <p class="text-[#57534E]">In progress. Continue with legal readiness basics.</p>
-            </article>
-            <article class="bg-white border border-[#D1D5DB] rounded-lg shadow p-5">
-              <p class="uppercase tracking-loose text-[#78716C] text-xs mb-2">Recommended</p>
-              <h3 class="text-2xl font-bold mb-2">Regulatory issue map</h3>
-              <p class="text-[#57534E]">Start here if your product touches payments, lending, onboarding, or stored value.</p>
-            </article>
-            <article class="bg-white border border-[#D1D5DB] rounded-lg shadow p-5">
-              <p class="uppercase tracking-loose text-[#78716C] text-xs mb-2">Saved</p>
-              <h3 class="text-2xl font-bold mb-2">Resources</h3>
-              <p class="text-[#57534E]">Reference materials you save will appear here.</p>
-            </article>
-          </section>
-
-          <section class="grid gap-5 lg:grid-cols-2 mb-8">
-            <article class="bg-white border border-[#D1D5DB] rounded-lg shadow p-6">
-              <h3 class="text-2xl font-bold mb-3">Guided discovery checklist</h3>
-              <div class="space-y-3">
-                <div class="flex items-start gap-3">
-                  <span class="mt-1 inline-block h-3 w-3 rounded-full bg-[#1D4771]"></span>
-                  <div>
-                    <p class="font-bold">Identify your product category</p>
-                    <p class="text-[#57534E] text-sm">Payments, lending, banking infrastructure, crypto, insurance, or investment activity.</p>
-                  </div>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="mt-1 inline-block h-3 w-3 rounded-full bg-[#DDEAF6] border border-[#1D4771]"></span>
-                  <div>
-                    <p class="font-bold">Map key regulatory issues</p>
-                    <p class="text-[#57534E] text-sm">Review licensing, AML, consumer protection, privacy, and contractual risk areas.</p>
-                  </div>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="mt-1 inline-block h-3 w-3 rounded-full bg-[#DDEAF6] border border-[#1D4771]"></span>
-                  <div>
-                    <p class="font-bold">Choose a next step</p>
-                    <p class="text-[#57534E] text-sm">Save resources, ask a question, or request a consultation.</p>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="bg-white border border-[#D1D5DB] rounded-lg shadow p-6">
-              <h3 class="text-2xl font-bold mb-3">Key actions</h3>
-              <div class="grid gap-3">
-                <a class="block border border-[#D1D5DB] rounded p-4 text-[#2E2E2E] no-underline hover:underline" href="#">
-                  Continue discovery path
-                </a>
-                <a class="block border border-[#D1D5DB] rounded p-4 text-[#2E2E2E] no-underline hover:underline" href="#">
-                  Browse fintech topics
-                </a>
-                <a class="block border border-[#D1D5DB] rounded p-4 text-[#2E2E2E] no-underline hover:underline" href="#">
-                  Save an interest area
-                </a>
-                <a class="block border border-[#D1D5DB] rounded p-4 text-[#2E2E2E] no-underline hover:underline" href="#">
-                  Ask a question
-                </a>
-              </div>
-            </article>
-          </section>
-
-          <section class="grid gap-5 lg:grid-cols-2">
-            <article class="bg-white border border-[#D1D5DB] rounded-lg shadow p-6">
-              <h3 class="text-2xl font-bold mb-3">Recent updates</h3>
-              <div class="space-y-4">
-                <div class="border-b border-[#D1D5DB] pb-3">
-                  <p class="font-bold">New topic recommended</p>
-                  <p class="text-[#57534E] text-sm">Review corporate structure before financing.</p>
-                </div>
-                <div class="border-b border-[#D1D5DB] pb-3">
-                  <p class="font-bold">Checklist saved</p>
-                  <p class="text-[#57534E] text-sm">Legal readiness basics added to your discovery path.</p>
-                </div>
-                <div>
-                  <p class="font-bold">Resource available</p>
-                  <p class="text-[#57534E] text-sm">Commercial partnership agreement notes are ready to review.</p>
-                </div>
-              </div>
-            </article>
-
-            <article class="bg-white border border-[#D1D5DB] rounded-lg shadow p-6">
-              <h3 class="text-2xl font-bold mb-3">Consultation CTA</h3>
-              <p class="text-[#57534E] mb-5">
-                When the learning path surfaces a legal issue you want to discuss, request help and include your current stage, product type, and key questions.
-              </p>
-              <a class="inline-block bg-[#1D4771] text-white font-bold rounded-full py-3 px-6 shadow no-underline hover:underline" href="#">
-                Request consultation
+              <a class="inline-block bg-[#1D4771] text-white font-bold rounded-full py-3 px-6 shadow no-underline hover:underline" href="#discovery-flow">
+                Continue assessment
               </a>
+              <div class="mt-5">
+                <p id="assessment-progress-label" class="text-[#57534E] text-sm mb-2">Assessment progress: 1 / 3</p>
+                <div class="h-2 bg-[#DDEAF6] rounded-full overflow-hidden">
+                  <div id="assessment-progress-bar" class="h-full bg-[#1D4771]" style="width: 33%;"></div>
+                </div>
+              </div>
             </article>
+          </section>
+
+          <section id="discovery-flow" class="mb-6">
+            <div class="bg-white border border-[#D1D5DB] rounded-lg shadow p-6">
+              <div class="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between mb-6">
+                <div>
+                  <p class="uppercase tracking-loose text-[#78716C] text-xs mb-2">Assessment</p>
+                  <h2 class="text-2xl font-bold leading-tight">Identify your legal structure and exposure</h2>
+                  <p class="text-[#57534E] mt-2 max-w-3xl">
+                    The system surfaces: relevant frameworks, risk signals, and next steps.
+                  </p>
+                </div>
+                <button
+                  id="reset-discovery"
+                  class="border border-[#D1D5DB] rounded-full px-4 py-2 text-[#2E2E2E] bg-white hover:underline"
+                  type="button"
+                >
+                  Reset
+                </button>
+              </div>
+
+              <div class="grid gap-6 lg:grid-cols-3">
+                {
+                  discoverySteps.map((step) => (
+                    <fieldset class="border border-[#D1D5DB] rounded-lg p-4">
+                      <legend class="font-bold px-1">{step.title}</legend>
+                      <p class="text-[#57534E] text-sm mb-3">{step.description}</p>
+                      <div class="space-y-3">
+                        {step.options.map((option) => (
+                          <label class="flex items-start gap-3 text-[#2E2E2E]">
+                            <input
+                              class="mt-1"
+                              type="checkbox"
+                              data-discovery-option
+                              data-topics={option.topics.join('|')}
+                              data-risk={option.risk}
+                              data-next={option.next}
+                            />
+                            <span>{option.label}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </fieldset>
+                  ))
+                }
+              </div>
+
+              <div class="mt-6 border border-[#D1D5DB] rounded-lg p-5 bg-[#FAFAF9]">
+                <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <h3 class="text-xl font-bold">Assessment output</h3>
+                    <p id="discovery-summary" class="text-[#57534E] mt-1">
+                      Select options above to generate recommended topics and next steps.
+                    </p>
+                  </div>
+                  <a class="inline-block bg-[#1D4771] text-white font-bold rounded-full py-3 px-6 shadow no-underline hover:underline" href="#topic-library">
+                    Review topic library
+                  </a>
+                </div>
+
+                <div class="grid gap-5 lg:grid-cols-3 mt-5">
+                  <div>
+                    <p class="font-bold mb-2">Relevant frameworks</p>
+                    <ul id="recommended-topics" class="list-disc pl-5 m-0 text-[#57534E]">
+                      <li>Payments and MSB registration</li>
+                      <li>FINTRAC compliance</li>
+                      <li>Partnership agreements</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-bold mb-2">Risk signals</p>
+                    <ul id="risk-flags" class="list-disc pl-5 m-0 text-[#57534E]">
+                      <li>Complete the discovery flow to identify risk flags.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-bold mb-2">Suggested actions</p>
+                    <ul id="next-steps" class="list-disc pl-5 m-0 text-[#57534E]">
+                      <li>Answer the questions above.</li>
+                      <li>Review the matching topic cards.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="grid gap-5 lg:grid-cols-3 mt-5 border-t border-[#D1D5DB] pt-5">
+                  <div>
+                    <p class="font-bold mb-2">Issue map</p>
+                    <ul id="issue-map" class="list-disc pl-5 m-0 text-[#57534E]">
+                      <li>Complete the assessment to build an issue map.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-bold mb-2">Artifacts to gather</p>
+                    <ul id="artifact-list" class="list-disc pl-5 m-0 text-[#57534E]">
+                      <li>Product description</li>
+                      <li>Key agreements</li>
+                      <li>Current operating flow</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-bold mb-2">Readiness note</p>
+                    <p id="readiness-note" class="text-[#57534E]">
+                      The system will produce a concise readiness note after selections are made.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="grid gap-4 md:grid-cols-3 mb-6">
+            <article class="bg-white border border-[#D1D5DB] rounded-lg p-4">
+              <p class="font-bold">Discovery Path</p>
+              <p class="text-[#57534E]">In progress</p>
+            </article>
+            <article class="bg-white border border-[#D1D5DB] rounded-lg p-4">
+              <p class="font-bold">Saved Resources</p>
+              <p id="saved-count-summary" class="text-[#57534E]">0 saved</p>
+            </article>
+            <article class="bg-white border border-[#D1D5DB] rounded-lg p-4">
+              <p class="font-bold">Recommended Topics</p>
+              <p class="text-[#57534E]">{portalTopics.length} available</p>
+            </article>
+          </section>
+
+          <section id="topic-library" class="mb-6">
+            <div class="mb-4">
+              <p class="uppercase tracking-loose text-[#78716C] text-xs mb-2">Content foundation</p>
+              <h2 class="text-2xl font-bold leading-tight">Knowledge system</h2>
+              <p class="text-[#57534E] mt-2 max-w-3xl">
+                Each framework follows a consistent readiness structure.
+              </p>
+            </div>
+
+            <div class="grid gap-4">
+              {
+                portalTopics.map((topic) => (
+                  <article class="bg-white border border-[#D1D5DB] rounded-lg p-5">
+                    <div class="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+                      <div>
+                        <h3 class="text-xl font-bold mb-2">{topic.title}</h3>
+                        <p class="text-[#57534E] max-w-4xl">{topic.overview}</p>
+                      </div>
+                      <a class="text-[#0365B2] font-bold no-underline hover:underline" href={topic.links[0]?.href || '/blog'}>
+                        View framework
+                      </a>
+                    </div>
+
+                    <div class="grid gap-4 lg:grid-cols-3 mt-5">
+                      <div>
+                        <p class="font-bold mb-2">Core questions</p>
+                        <ul class="list-disc pl-5 m-0 text-[#57534E]">
+                          {topic.questions.map((item) => (
+                            <li class="mb-1">{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div>
+                        <p class="font-bold mb-2">Failure patterns</p>
+                        <ul class="list-disc pl-5 m-0 text-[#57534E]">
+                          {topic.risks.map((item) => (
+                            <li class="mb-1">{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div>
+                        <p class="font-bold mb-2">Required artifacts</p>
+                        <ul class="list-disc pl-5 m-0 text-[#57534E]">
+                          {topic.documents.map((item) => (
+                            <li class="mb-1">{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="grid gap-4 lg:grid-cols-2 mt-5 border-t border-[#D1D5DB] pt-4">
+                      <div>
+                        <p class="font-bold mb-2">Escalation points</p>
+                        <ul class="list-disc pl-5 m-0 text-[#57534E]">
+                          {topic.counselTriggers.map((item) => (
+                            <li class="mb-1">{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div>
+                        <p class="font-bold mb-2">Related frameworks</p>
+                        <div class="flex flex-wrap gap-2">
+                          {topic.links.map((link) => (
+                            <a
+                              class="inline-block border border-[#D1D5DB] rounded-full px-3 py-1 text-[#0365B2] no-underline hover:underline"
+                              href={link.href}
+                            >
+                              {link.text}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="resource-library" class="mb-6">
+            <div class="mb-4">
+              <p class="uppercase tracking-loose text-[#78716C] text-xs mb-2">Field resources</p>
+              <h2 class="text-2xl font-bold leading-tight">Resource library</h2>
+              <p class="text-[#57534E] mt-2 max-w-3xl">
+                Filter working resources by framework, company stage, and resource type.
+              </p>
+            </div>
+
+            <div class="bg-white border border-[#D1D5DB] rounded-lg p-5">
+              <div class="grid gap-4 lg:grid-cols-3 mb-5">
+                <label class="block">
+                  <span class="block font-bold mb-2">Framework</span>
+                  <select id="resource-framework-filter" class="w-full border border-[#D1D5DB] rounded px-3 py-2 bg-white">
+                    <option value="all">All frameworks</option>
+                    {portalTopics.map((topic) => <option value={topic.id}>{topic.title}</option>)}
+                  </select>
+                </label>
+
+                <label class="block">
+                  <span class="block font-bold mb-2">Stage</span>
+                  <select id="resource-stage-filter" class="w-full border border-[#D1D5DB] rounded px-3 py-2 bg-white">
+                    <option value="all">All stages</option>
+                    <option value="Pre-launch">Pre-launch</option>
+                    <option value="Launch">Launch</option>
+                    <option value="Growth">Growth</option>
+                    <option value="Diligence">Diligence</option>
+                  </select>
+                </label>
+
+                <label class="block">
+                  <span class="block font-bold mb-2">Resource type</span>
+                  <select id="resource-type-filter" class="w-full border border-[#D1D5DB] rounded px-3 py-2 bg-white">
+                    <option value="all">All types</option>
+                    <option value="Case note">Case note</option>
+                    <option value="Checklist">Checklist</option>
+                    <option value="Guide">Guide</option>
+                    <option value="Intake prompt">Intake prompt</option>
+                    <option value="Worksheet">Worksheet</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="grid gap-3" id="resource-list">
+                {
+                  resourceLibrary.map((resource) => (
+                    <article
+                      class="border border-[#D1D5DB] rounded-lg p-4"
+                      data-resource-card
+                      data-framework={resource.framework}
+                      data-stage={resource.stage}
+                      data-type={resource.type}
+                    >
+                      <div class="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+                        <div>
+                          <div class="flex flex-wrap gap-2 mb-2 text-sm">
+                            <span class="border border-[#D1D5DB] rounded-full px-2 py-1 text-[#57534E]">{resource.type}</span>
+                            <span class="border border-[#D1D5DB] rounded-full px-2 py-1 text-[#57534E]">{resource.stage}</span>
+                          </div>
+                          <h3 class="text-lg font-bold">{resource.title}</h3>
+                          <p class="text-[#57534E] mt-1">{resource.description}</p>
+                        </div>
+                        <a class="text-[#0365B2] font-bold no-underline hover:underline" href={resource.href}>
+                          Open
+                        </a>
+                        <button
+                          class="border border-[#D1D5DB] rounded-full px-3 py-2 text-[#2E2E2E] bg-white hover:underline"
+                          type="button"
+                          data-save-resource
+                          data-title={resource.title}
+                          data-type={resource.type}
+                          data-framework={resource.framework}
+                          data-stage={resource.stage}
+                          data-href={resource.href}
+                        >
+                          Save
+                        </button>
+                      </div>
+                    </article>
+                  ))
+                }
+              </div>
+
+              <p id="resource-empty" class="hidden text-[#57534E] mt-4">No resources match the current filters.</p>
+            </div>
+          </section>
+
+          <section id="saved-items" class="mb-6">
+            <div class="mb-4">
+              <p class="uppercase tracking-loose text-[#78716C] text-xs mb-2">Saved</p>
+              <h2 class="text-2xl font-bold leading-tight">Saved items</h2>
+              <p class="text-[#57534E] mt-2 max-w-3xl">
+                Save frameworks and resources for later review in your portal account.
+              </p>
+            </div>
+
+            <div class="bg-white border border-[#D1D5DB] rounded-lg p-5">
+              <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between mb-4">
+                <p id="saved-count-detail" class="font-bold">0 saved items</p>
+                <button
+                  id="clear-saved-items"
+                  class="border border-[#D1D5DB] rounded-full px-4 py-2 text-[#2E2E2E] bg-white hover:underline"
+                  type="button"
+                >
+                  Clear saved
+                </button>
+              </div>
+              <div id="saved-items-list" class="grid gap-3">
+                <p class="text-[#57534E]">Saved resources will appear here.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="request-help" class="mb-6">
+            <div class="mb-4">
+              <p class="uppercase tracking-loose text-[#78716C] text-xs mb-2">Requests</p>
+              <h2 class="text-2xl font-bold leading-tight">Request help</h2>
+              <p class="text-[#57534E] mt-2 max-w-3xl">
+                Submit a legal question, consultation request, or review workflow for follow up.
+              </p>
+            </div>
+
+            <div class="bg-white border border-[#D1D5DB] rounded-lg p-5">
+              <form id="request-help-form" class="grid gap-4">
+                <div class="grid gap-4 lg:grid-cols-2">
+                  <label class="block">
+                    <span class="block font-bold mb-2">Request type</span>
+                    <select name="request_type" class="w-full border border-[#D1D5DB] rounded px-3 py-2 bg-white">
+                      <option>Ask a legal question</option>
+                      <option>Request consultation</option>
+                      <option>Review business model</option>
+                      <option>Review agreement</option>
+                      <option>Prepare for financing</option>
+                      <option>Regulatory readiness review</option>
+                    </select>
+                  </label>
+
+                  <label class="block">
+                    <span class="block font-bold mb-2">Timeline</span>
+                    <select name="timeline" class="w-full border border-[#D1D5DB] rounded px-3 py-2 bg-white">
+                      <option>Exploratory</option>
+                      <option>This month</option>
+                      <option>This week</option>
+                      <option>Urgent partner or regulatory request</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div class="grid gap-4 lg:grid-cols-2">
+                  <label class="block">
+                    <span class="block font-bold mb-2">Company or project</span>
+                    <input name="company" class="w-full border border-[#D1D5DB] rounded px-3 py-2" type="text" placeholder="Company name or project name" />
+                  </label>
+
+                  <label class="block">
+                    <span class="block font-bold mb-2">Primary framework</span>
+                    <select name="framework" class="w-full border border-[#D1D5DB] rounded px-3 py-2 bg-white">
+                      {portalTopics.map((topic) => <option>{topic.title}</option>)}
+                    </select>
+                  </label>
+                </div>
+
+                <label class="block">
+                  <span class="block font-bold mb-2">Product summary</span>
+                  <textarea name="summary" class="w-full border border-[#D1D5DB] rounded px-3 py-2" rows="4" placeholder="Describe the product, users, jurisdictions, partners, and current concern."></textarea>
+                </label>
+
+                <label class="block">
+                  <span class="block font-bold mb-2">Documents available</span>
+                  <input name="documents" class="w-full border border-[#D1D5DB] rounded px-3 py-2" type="text" placeholder="For example: payment flow, contracts, policies, cap table, product summary" />
+                </label>
+
+                <div>
+                  <button class="inline-block bg-[#1D4771] text-white font-bold rounded-full py-3 px-6 shadow hover:underline" type="submit">
+                    Submit request
+                  </button>
+                  <p id="request-help-status" class="text-[#57534E] text-sm mt-3">
+                    Requests are saved to the portal when Supabase is configured.
+                  </p>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <section id="admin-view" class="admin-only hidden mb-6">
+            <div class="mb-4">
+              <p class="uppercase tracking-loose text-[#78716C] text-xs mb-2">Admin</p>
+              <h2 class="text-2xl font-bold leading-tight">Portal admin</h2>
+              <p class="text-[#57534E] mt-2 max-w-3xl">
+                Review consultation requests, assessment activity, and portal accounts.
+              </p>
+            </div>
+
+            <div class="grid gap-4 lg:grid-cols-2">
+              <article class="bg-white border border-[#D1D5DB] rounded-lg p-5">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="font-bold text-lg">Recent requests</h3>
+                  <button id="admin-refresh" class="border border-[#D1D5DB] rounded-full px-3 py-2 text-[#2E2E2E] bg-white hover:underline" type="button">
+                    Refresh
+                  </button>
+                </div>
+                <div id="admin-requests-list" class="grid gap-3">
+                  <p class="text-[#57534E]">Admin requests will appear here.</p>
+                </div>
+              </article>
+
+              <article class="bg-white border border-[#D1D5DB] rounded-lg p-5">
+                <h3 class="font-bold text-lg mb-4">Recent portal activity</h3>
+                <div id="admin-activity-list" class="grid gap-3">
+                  <p class="text-[#57534E]">Activity will appear here.</p>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section id="portal-map" class="mb-6">
+            <div class="mb-4">
+              <p class="uppercase tracking-loose text-[#78716C] text-xs mb-2">Infrastructure</p>
+              <h2 class="text-2xl font-bold leading-tight">Portal map</h2>
+              <p class="text-[#57534E] mt-2 max-w-3xl">
+                The portal structure is organized around assessment, knowledge, resources, saved work, and requests.
+              </p>
+            </div>
+
+            <div class="grid gap-4 lg:grid-cols-3">
+              <article class="bg-white border border-[#D1D5DB] rounded-lg p-5">
+                <p class="font-bold mb-2">Overview</p>
+                <p class="text-[#57534E]">System status, assessment progress, saved work, and current recommendation count.</p>
+              </article>
+              <article class="bg-white border border-[#D1D5DB] rounded-lg p-5">
+                <p class="font-bold mb-2">Discovery</p>
+                <p class="text-[#57534E]">Product layer, operational activity, business stage, assessment output, and suggested actions.</p>
+              </article>
+              <article class="bg-white border border-[#D1D5DB] rounded-lg p-5">
+                <p class="font-bold mb-2">Topics</p>
+                <p class="text-[#57534E]">Frameworks, core questions, failure patterns, required artifacts, and escalation points.</p>
+              </article>
+              <article class="bg-white border border-[#D1D5DB] rounded-lg p-5">
+                <p class="font-bold mb-2">Field Resources</p>
+                <p class="text-[#57534E]">Checklists, guides, worksheets, case notes, and intake prompts filtered by framework and stage.</p>
+              </article>
+              <article class="bg-white border border-[#D1D5DB] rounded-lg p-5">
+                <p class="font-bold mb-2">Saved</p>
+                <p class="text-[#57534E]">Account-stored resources for later review.</p>
+              </article>
+              <article class="bg-white border border-[#D1D5DB] rounded-lg p-5">
+                <p class="font-bold mb-2">Requests</p>
+                <p class="text-[#57534E]">Structured intake prompts for questions, consultations, model reviews, and readiness work.</p>
+              </article>
+            </div>
+          </section>
+
+          <section id="content-roadmap" class="mb-6">
+            <div class="mb-4">
+              <p class="uppercase tracking-loose text-[#78716C] text-xs mb-2">Roadmap</p>
+              <h2 class="text-2xl font-bold leading-tight">Content priorities</h2>
+              <p class="text-[#57534E] mt-2 max-w-3xl">
+                Priority sequence for expanding the portal into a deeper legal readiness system.
+              </p>
+            </div>
+
+            <div class="bg-white border border-[#D1D5DB] rounded-lg p-5">
+              <div class="grid gap-3">
+                {
+                  contentPriorities.map((item, index) => (
+                    <article class="border border-[#D1D5DB] rounded-lg p-4">
+                      <div class="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+                        <div>
+                          <p class="text-[#78716C] text-sm">Priority {index + 1}</p>
+                          <h3 class="font-bold text-lg">{item.title}</h3>
+                          <p class="text-[#57534E] mt-1">{item.focus}</p>
+                        </div>
+                        <span class="border border-[#D1D5DB] rounded-full px-3 py-1 text-[#57534E] text-sm">{item.status}</span>
+                      </div>
+                    </article>
+                  ))
+                }
+              </div>
+            </div>
+          </section>
+
+          <section id="portal-consultation">
+            <div class="bg-white border border-[#D1D5DB] rounded-lg p-5">
+              <p class="font-bold mb-1">Need legal help now?</p>
+              <p class="text-[#57534E] mb-4">Request a consultation with a fintech lawyer.</p>
+              <a class="inline-block bg-[#1D4771] text-white font-bold rounded-full py-3 px-6 shadow no-underline hover:underline" href="#request-help">
+                Speak with counsel
+              </a>
+            </div>
           </section>
         </main>
 
@@ -268,5 +1223,538 @@
         </footer>
       </div>
     </div>
+    <script define:vars={{ supabaseUrl, supabaseAnonKey, portalNotificationEndpoint }}>
+      const topicNames = {
+        'payments-msb': 'Payments and MSB registration',
+        'fintrac-compliance': 'FINTRAC compliance',
+        'lending-credit': 'Lending and credit products',
+        'investment-securities': 'Investment and securities issues',
+        'insurance-distribution': 'Insurance distribution',
+        'embedded-finance': 'Embedded finance',
+        'crypto-web3': 'Crypto/Web3',
+        'partnership-agreements': 'Partnership agreements',
+        'corporate-fundraising': 'Corporate structure and fundraising',
+      };
+
+      const topicArtifacts = {
+        'payments-msb': ['Payment flow map', 'Partner and processor agreements', 'Customer terms'],
+        'fintrac-compliance': ['Compliance policies', 'Risk assessment', 'Training records'],
+        'lending-credit': ['Credit product summary', 'Borrower disclosures', 'Servicing workflow'],
+        'investment-securities': ['Product description', 'Marketing materials', 'Referral agreements'],
+        'insurance-distribution': ['Customer journey', 'Carrier or broker agreements', 'Compensation terms'],
+        'embedded-finance': ['Partner role map', 'Customer disclosures', 'Operational responsibility matrix'],
+        'crypto-web3': ['Token or product description', 'Wallet and custody model', 'Terms of use'],
+        'partnership-agreements': ['Draft partner agreement', 'Service levels', 'Data sharing terms'],
+        'corporate-fundraising': ['Corporate records', 'Cap table', 'Board and shareholder approvals'],
+      };
+
+      const issueMapNotes = {
+        'payments-msb': 'Payment model and MSB exposure',
+        'fintrac-compliance': 'AML program and operating evidence',
+        'lending-credit': 'Credit role allocation and borrower disclosures',
+        'investment-securities': 'Securities, referral, custody, and marketing exposure',
+        'insurance-distribution': 'Insurance distribution, licensing, and compensation exposure',
+        'embedded-finance': 'Regulated partner, disclosure, and platform role exposure',
+        'crypto-web3': 'Token, custody, trading, AML, and securities exposure',
+        'partnership-agreements': 'Partner responsibility, liability, and continuity exposure',
+        'corporate-fundraising': 'Corporate records, approvals, ownership, and diligence exposure',
+      };
+
+      const options = Array.from(document.querySelectorAll('[data-discovery-option]'));
+      const topicList = document.getElementById('recommended-topics');
+      const riskList = document.getElementById('risk-flags');
+      const nextList = document.getElementById('next-steps');
+      const issueMap = document.getElementById('issue-map');
+      const artifactList = document.getElementById('artifact-list');
+      const readinessNote = document.getElementById('readiness-note');
+      const summary = document.getElementById('discovery-summary');
+      const resetButton = document.getElementById('reset-discovery');
+      const resourceCards = Array.from(document.querySelectorAll('[data-resource-card]'));
+      const resourceFrameworkFilter = document.getElementById('resource-framework-filter');
+      const resourceStageFilter = document.getElementById('resource-stage-filter');
+      const resourceTypeFilter = document.getElementById('resource-type-filter');
+      const resourceEmpty = document.getElementById('resource-empty');
+      const saveButtons = Array.from(document.querySelectorAll('[data-save-resource]'));
+      const savedItemsList = document.getElementById('saved-items-list');
+      const savedCountSummary = document.getElementById('saved-count-summary');
+      const savedCountDetail = document.getElementById('saved-count-detail');
+      const clearSavedItems = document.getElementById('clear-saved-items');
+      const sessionKey = 'fintech-lawyer-session';
+      const authGate = document.getElementById('portal-auth-gate');
+      const authGateMessage = document.getElementById('portal-auth-gate-message');
+      const userLabel = document.getElementById('portal-user-label');
+      const logoutButton = document.getElementById('portal-logout');
+      const progressLabel = document.getElementById('assessment-progress-label');
+      const progressBar = document.getElementById('assessment-progress-bar');
+      const requestHelpForm = document.getElementById('request-help-form');
+      const requestHelpStatus = document.getElementById('request-help-status');
+      const adminRefresh = document.getElementById('admin-refresh');
+      const adminRequestsList = document.getElementById('admin-requests-list');
+      const adminActivityList = document.getElementById('admin-activity-list');
+      let portalSession = null;
+      let portalProfile = null;
+      let savedItemsCache = [];
+
+      function hasSupabaseConfig() {
+        return Boolean(supabaseUrl && supabaseAnonKey);
+      }
+
+      function readLocalSession() {
+        try {
+          return JSON.parse(window.localStorage.getItem(sessionKey) || 'null');
+        } catch {
+          return null;
+        }
+      }
+
+      function writeLocalSession(session) {
+        window.localStorage.setItem(sessionKey, JSON.stringify(session));
+      }
+
+      function clearLocalSession() {
+        window.localStorage.removeItem(sessionKey);
+      }
+
+      function getUserId() {
+        return portalSession?.user?.id;
+      }
+
+      function getUserEmail() {
+        return portalSession?.user?.email || 'Signed in';
+      }
+
+      async function refreshSessionIfNeeded(session) {
+        if (!session?.refresh_token) return session;
+        const expiresAt = Number(session.expires_at || 0);
+        const now = Math.floor(Date.now() / 1000);
+        if (expiresAt > now + 60) return session;
+
+        const response = await fetch(`${supabaseUrl}/auth/v1/token?grant_type=refresh_token`, {
+          method: 'POST',
+          headers: {
+            apikey: supabaseAnonKey,
+            Authorization: `Bearer ${supabaseAnonKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ refresh_token: session.refresh_token }),
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.message || 'Portal session expired.');
+        const nextSession = {
+          access_token: data.access_token,
+          refresh_token: data.refresh_token || session.refresh_token,
+          expires_at: Math.floor(Date.now() / 1000) + Number(data.expires_in || 3600),
+          user: data.user || session.user,
+        };
+        writeLocalSession(nextSession);
+        return nextSession;
+      }
+
+      async function apiFetch(path, options = {}) {
+        if (!hasSupabaseConfig()) {
+          throw new Error('Supabase is not configured.');
+        }
+        if (!portalSession?.access_token) {
+          throw new Error('Portal session is missing.');
+        }
+        const response = await fetch(`${supabaseUrl}/rest/v1/${path}`, {
+          ...options,
+          headers: {
+            apikey: supabaseAnonKey,
+            Authorization: `Bearer ${portalSession.access_token}`,
+            'Content-Type': 'application/json',
+            Prefer: 'return=representation',
+            ...(options.headers || {}),
+          },
+        });
+        const text = await response.text();
+        const data = text ? JSON.parse(text) : null;
+        if (!response.ok) {
+          throw new Error(data?.message || data?.hint || 'Database request failed.');
+        }
+        return data;
+      }
+
+      async function recordActivity(action, metadata = {}) {
+        if (!getUserId()) return;
+        try {
+          await apiFetch('activity_log', {
+            method: 'POST',
+            body: JSON.stringify({
+              user_id: getUserId(),
+              action,
+              metadata,
+            }),
+          });
+        } catch {
+          // Activity logging should never block the user flow.
+        }
+      }
+
+      async function loadProfile() {
+        const userId = getUserId();
+        const email = getUserEmail();
+        const profiles = await apiFetch(`profiles?user_id=eq.${encodeURIComponent(userId)}&select=*`);
+        if (profiles?.[0]) return profiles[0];
+        const inserted = await apiFetch('profiles?on_conflict=user_id', {
+          method: 'POST',
+          headers: { Prefer: 'resolution=merge-duplicates,return=representation' },
+          body: JSON.stringify({ user_id: userId, email, role: 'member' }),
+        });
+        return inserted?.[0] || { user_id: userId, email, role: 'member' };
+      }
+
+      async function loadAssessment() {
+        const userId = getUserId();
+        const rows = await apiFetch(`portal_assessments?user_id=eq.${encodeURIComponent(userId)}&select=*`);
+        return rows?.[0] || null;
+      }
+
+      async function saveAssessment() {
+        const userId = getUserId();
+        if (!userId) return;
+        const selected = options
+          .map((option, index) => ({ option, index }))
+          .filter(({ option }) => option.checked)
+          .map(({ index }) => index);
+        const selectedTopics = unique(
+          options.filter((option) => option.checked).flatMap((option) => (option.dataset.topics || '').split('|'))
+        );
+        const completedSteps = new Set(
+          options
+            .map((option, index) => ({ option, index }))
+            .filter(({ option }) => option.checked)
+            .map(({ index }) => Math.floor(index / 3))
+        ).size;
+
+        await apiFetch('portal_assessments?on_conflict=user_id', {
+          method: 'POST',
+          headers: { Prefer: 'resolution=merge-duplicates,return=representation' },
+          body: JSON.stringify({
+            user_id: userId,
+            selected_options: selected,
+            recommended_topics: selectedTopics,
+            progress_step: Math.max(1, completedSteps),
+            updated_at: new Date().toISOString(),
+          }),
+        });
+      }
+
+      function applyAssessment(assessment) {
+        if (!assessment?.selected_options) return;
+        options.forEach((option, index) => {
+          option.checked = assessment.selected_options.includes(index);
+        });
+        updateDiscoveryResults();
+      }
+
+      async function readSavedItems() {
+        const userId = getUserId();
+        if (!userId || !hasSupabaseConfig()) return savedItemsCache;
+        const rows = await apiFetch(
+          `saved_resources?user_id=eq.${encodeURIComponent(userId)}&select=id,title,type,framework,stage,href,created_at&order=created_at.desc`
+        );
+        savedItemsCache = rows || [];
+        return savedItemsCache;
+      }
+
+      async function writeSavedItems(items) {
+        savedItemsCache = items;
+      }
+
+      async function renderSavedItems() {
+        const savedItems = await readSavedItems();
+        if (savedCountSummary) {
+          savedCountSummary.textContent = `${savedItems.length} saved`;
+        }
+        if (savedCountDetail) {
+          savedCountDetail.textContent = `${savedItems.length} saved item${savedItems.length === 1 ? '' : 's'}`;
+        }
+        if (!savedItemsList) return;
+        savedItemsList.innerHTML = '';
+
+        if (!savedItems.length) {
+          const empty = document.createElement('p');
+          empty.className = 'text-[#57534E]';
+          empty.textContent = 'Saved resources will appear here.';
+          savedItemsList.appendChild(empty);
+          return;
+        }
+
+        savedItems.forEach((item) => {
+          const article = document.createElement('article');
+          article.className = 'border border-[#D1D5DB] rounded-lg p-4';
+
+          const title = document.createElement('p');
+          title.className = 'font-bold';
+          title.textContent = item.title;
+
+          const meta = document.createElement('p');
+          meta.className = 'text-[#57534E] text-sm mt-1';
+          meta.textContent = `${item.type} | ${item.stage}`;
+
+          const link = document.createElement('a');
+          link.className = 'inline-block mt-3 text-[#0365B2] font-bold no-underline hover:underline';
+          link.href = item.href;
+          link.textContent = 'Open saved item';
+
+          article.appendChild(title);
+          article.appendChild(meta);
+          article.appendChild(link);
+          savedItemsList.appendChild(article);
+        });
+      }
+
+      async function saveResource(button) {
+        const nextItem = {
+          user_id: getUserId(),
+          title: button.dataset.title,
+          type: button.dataset.type,
+          framework: button.dataset.framework,
+          stage: button.dataset.stage,
+          href: button.dataset.href,
+        };
+        const savedItems = await readSavedItems();
+        const exists = savedItems.some((item) => item.title === nextItem.title);
+        if (!exists) {
+          await apiFetch('saved_resources', {
+            method: 'POST',
+            body: JSON.stringify(nextItem),
+          });
+          await writeSavedItems([nextItem, ...savedItems]);
+          await recordActivity('saved_resource', { title: nextItem.title });
+        }
+        await renderSavedItems();
+      }
+
+      function renderList(target, items) {
+        if (!target) return;
+        target.innerHTML = '';
+        items.forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          target.appendChild(li);
+        });
+      }
+
+      function unique(items) {
+        return Array.from(new Set(items)).filter(Boolean);
+      }
+
+      function updateDiscoveryResults() {
+        const selected = options.filter((option) => option.checked);
+        const topicIds = unique(selected.flatMap((option) => (option.dataset.topics || '').split('|')));
+        const topics = unique(topicIds.map((topic) => topicNames[topic]));
+        const risks = unique(selected.map((option) => option.dataset.risk));
+        const nextSteps = unique(selected.map((option) => option.dataset.next));
+        const artifacts = unique(topicIds.flatMap((topic) => topicArtifacts[topic] || []));
+        const issues = unique(topicIds.map((topic) => issueMapNotes[topic]));
+
+        if (!selected.length) {
+          renderList(topicList, [
+            'Payments and MSB registration',
+            'FINTRAC compliance',
+            'Partnership agreements',
+          ]);
+          renderList(riskList, ['Complete the discovery flow to identify risk flags.']);
+          renderList(nextList, ['Answer the questions above.', 'Review the matching topic cards.']);
+          renderList(issueMap, ['Complete the assessment to build an issue map.']);
+          renderList(artifactList, ['Product description', 'Key agreements', 'Current operating flow']);
+          if (readinessNote) {
+            readinessNote.textContent = 'The system will produce a concise readiness note after selections are made.';
+          }
+          if (summary) {
+            summary.textContent = 'Select options above to generate recommended topics and next steps.';
+          }
+          return;
+        }
+
+        renderList(topicList, topics);
+        renderList(riskList, risks);
+        renderList(nextList, nextSteps);
+        renderList(issueMap, issues);
+        renderList(artifactList, artifacts.slice(0, 8));
+        if (readinessNote) {
+          readinessNote.textContent = `${topics.length} framework${topics.length === 1 ? '' : 's'} identified. Start with the artifacts listed here, then review the matching framework blocks and field resources.`;
+        }
+        if (summary) {
+          summary.textContent = `${selected.length} selection${selected.length === 1 ? '' : 's'} made. Review the recommended topics, risk flags, and next steps below.`;
+        }
+
+        const completedSteps = new Set(
+          selected.map((selectedOption) => Math.floor(options.indexOf(selectedOption) / 3))
+        ).size;
+        const progress = Math.max(1, completedSteps);
+        if (progressLabel) {
+          progressLabel.textContent = `Assessment progress: ${progress} / 3`;
+        }
+        if (progressBar) {
+          progressBar.style.width = `${Math.min(100, Math.round((progress / 3) * 100))}%`;
+        }
+      }
+
+      function updateResourceFilters() {
+        const framework = resourceFrameworkFilter?.value || 'all';
+        const stage = resourceStageFilter?.value || 'all';
+        const type = resourceTypeFilter?.value || 'all';
+        let visibleCount = 0;
+
+        resourceCards.forEach((card) => {
+          const frameworkMatch = framework === 'all' || card.dataset.framework === framework;
+          const stageMatch = stage === 'all' || card.dataset.stage === stage;
+          const typeMatch = type === 'all' || card.dataset.type === type;
+          const isVisible = frameworkMatch && stageMatch && typeMatch;
+          card.classList.toggle('hidden', !isVisible);
+          if (isVisible) visibleCount += 1;
+        });
+
+        resourceEmpty?.classList.toggle('hidden', visibleCount !== 0);
+      }
+
+      async function submitRequest(event) {
+        event.preventDefault();
+        if (!requestHelpForm || !getUserId()) return;
+        const form = new FormData(requestHelpForm);
+        const request = {
+          user_id: getUserId(),
+          request_type: String(form.get('request_type') || ''),
+          timeline: String(form.get('timeline') || ''),
+          company: String(form.get('company') || ''),
+          framework: String(form.get('framework') || ''),
+          summary: String(form.get('summary') || ''),
+          documents: String(form.get('documents') || ''),
+          status: 'submitted',
+        };
+        try {
+          if (requestHelpStatus) requestHelpStatus.textContent = 'Submitting request...';
+          const inserted = await apiFetch('consultation_requests', {
+            method: 'POST',
+            body: JSON.stringify(request),
+          });
+          await recordActivity('submitted_request', { request_type: request.request_type, framework: request.framework });
+          if (portalNotificationEndpoint) {
+            await fetch(portalNotificationEndpoint, {
+              method: 'POST',
+              headers: {
+                Authorization: `Bearer ${portalSession.access_token}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ type: 'consultation_request', request: inserted?.[0] || request }),
+            }).catch(() => null);
+          }
+          requestHelpForm.reset();
+          if (requestHelpStatus) requestHelpStatus.textContent = 'Request submitted. It is now saved in the portal.';
+          await loadAdminData();
+        } catch (error) {
+          if (requestHelpStatus) requestHelpStatus.textContent = error.message;
+        }
+      }
+
+      async function loadAdminData() {
+        if (portalProfile?.role !== 'admin') return;
+        try {
+          const requests = await apiFetch('consultation_requests?select=*&order=created_at.desc&limit=10');
+          if (adminRequestsList) {
+            adminRequestsList.innerHTML = '';
+            if (!requests?.length) {
+              adminRequestsList.innerHTML = '<p class="text-[#57534E]">No requests yet.</p>';
+            } else {
+              requests.forEach((request) => {
+                const article = document.createElement('article');
+                article.className = 'border border-[#D1D5DB] rounded-lg p-4';
+                article.innerHTML = `<p class="font-bold">${request.request_type || 'Request'}</p><p class="text-[#57534E] text-sm">${request.company || 'No company'} | ${request.timeline || 'No timeline'} | ${request.status || 'submitted'}</p><p class="text-[#57534E] mt-2">${request.summary || ''}</p>`;
+                adminRequestsList.appendChild(article);
+              });
+            }
+          }
+
+          const activity = await apiFetch('activity_log?select=*&order=created_at.desc&limit=10');
+          if (adminActivityList) {
+            adminActivityList.innerHTML = '';
+            if (!activity?.length) {
+              adminActivityList.innerHTML = '<p class="text-[#57534E]">No activity yet.</p>';
+            } else {
+              activity.forEach((item) => {
+                const article = document.createElement('article');
+                article.className = 'border border-[#D1D5DB] rounded-lg p-4';
+                article.innerHTML = `<p class="font-bold">${item.action}</p><p class="text-[#57534E] text-sm">${new Date(item.created_at).toLocaleString()}</p>`;
+                adminActivityList.appendChild(article);
+              });
+            }
+          }
+        } catch (error) {
+          if (adminRequestsList) adminRequestsList.innerHTML = `<p class="text-[#57534E]">${error.message}</p>`;
+        }
+      }
+
+      async function initializePortal() {
+        try {
+          if (!hasSupabaseConfig()) {
+            throw new Error('Portal backend is not configured. Add PUBLIC_SUPABASE_URL and PUBLIC_SUPABASE_ANON_KEY.');
+          }
+          const localSession = readLocalSession();
+          if (!localSession?.access_token) {
+            window.location.href = '/login';
+            return;
+          }
+          portalSession = await refreshSessionIfNeeded(localSession);
+          portalProfile = await loadProfile();
+          if (userLabel) userLabel.textContent = getUserEmail();
+          document.body.classList.remove('portal-locked');
+          authGate?.classList.add('hidden');
+
+          if (portalProfile?.role === 'admin') {
+            document.querySelectorAll('.admin-only').forEach((element) => element.classList.remove('hidden'));
+            await loadAdminData();
+          }
+
+          const assessment = await loadAssessment();
+          applyAssessment(assessment);
+          await renderSavedItems();
+          await recordActivity('portal_opened', {});
+        } catch (error) {
+          if (authGateMessage) authGateMessage.textContent = error.message;
+        }
+      }
+
+      options.forEach((option) =>
+        option.addEventListener('change', async () => {
+          updateDiscoveryResults();
+          try {
+            await saveAssessment();
+            await recordActivity('updated_assessment', {});
+          } catch {
+            // Assessment remains usable even when persistence fails.
+          }
+        })
+      );
+      resetButton?.addEventListener('click', () => {
+        options.forEach((option) => {
+          option.checked = false;
+        });
+        updateDiscoveryResults();
+        saveAssessment().catch(() => null);
+      });
+      resourceFrameworkFilter?.addEventListener('change', updateResourceFilters);
+      resourceStageFilter?.addEventListener('change', updateResourceFilters);
+      resourceTypeFilter?.addEventListener('change', updateResourceFilters);
+      saveButtons.forEach((button) => button.addEventListener('click', () => saveResource(button)));
+      clearSavedItems?.addEventListener('click', async () => {
+        const userId = getUserId();
+        if (userId) {
+          await apiFetch(`saved_resources?user_id=eq.${encodeURIComponent(userId)}`, { method: 'DELETE' }).catch(() => null);
+        }
+        await writeSavedItems([]);
+        await renderSavedItems();
+      });
+      requestHelpForm?.addEventListener('submit', submitRequest);
+      adminRefresh?.addEventListener('click', loadAdminData);
+      logoutButton?.addEventListener('click', () => {
+        clearLocalSession();
+        window.location.href = '/login';
+      });
+      updateResourceFilters();
+      initializePortal();
+    </script>
   </body>
 </html>

@@ -717,12 +717,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   -->
     <script>
-      var scrollpos = window.scrollY;
-      var header = document.getElementById("header");
-      var navcontent = document.getElementById("nav-content");
-      var navaction = document.getElementById("navAction");
-      var brandname = document.getElementById("brandname");
-      var toToggle = document.querySelectorAll(".toggleColour");
+      let scrollpos = window.scrollY;
+      const header = document.getElementById("header");
+      const navcontent = document.getElementById("nav-content");
+      const navaction = document.getElementById("navAction");
+      const toToggle = document.querySelectorAll(".toggleColour");
 
       document.addEventListener("scroll", function () {
         /*Apply classes for slide in bar*/
@@ -735,7 +734,7 @@
           navaction.classList.remove("text-[#2E2E2E]");
           navaction.classList.add("text-white");
           //Use to switch toggleColour colours
-          for (var i = 0; i < toToggle.length; i++) {
+          for (let i = 0; i < toToggle.length; i++) {
             toToggle[i].classList.add("text-[#2E2E2E]");
             toToggle[i].classList.remove("text-white");
           }
@@ -749,7 +748,7 @@
           navaction.classList.remove("text-white");
           navaction.classList.add("text-[#2E2E2E]");
           //Use to switch toggleColour colours
-          for (var i = 0; i < toToggle.length; i++) {
+          for (let i = 0; i < toToggle.length; i++) {
             toToggle[i].classList.add("text-white");
             toToggle[i].classList.remove("text-[#2E2E2E]");
           }
@@ -764,12 +763,12 @@
       /*Toggle dropdown list*/
       /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
 
-      var navMenuDiv = document.getElementById("nav-content");
-      var navMenu = document.getElementById("nav-toggle");
+      const navMenuDiv = document.getElementById("nav-content");
+      const navMenu = document.getElementById("nav-toggle");
 
       document.onclick = check;
       function check(e) {
-        var target = (e && e.target) || (event && event.srcElement);
+        const target = e?.target;
 
         //Nav Menu
         if (!checkParent(target, navMenuDiv)) {

@@ -19,11 +19,11 @@ Unless and until we specifically agree to act for you on a matter, you should no
 
 ## Intellectual Property Notice
 
-Levine Legal either owns the intellectual property rights in the underlying HTML, scripts, text, audio clips, video clips and other content that is made available to you on our Website, or has obtained the permission of the owner of the intellectual property in such content to use the content on our Website.
+Levine Law either owns the intellectual property rights in the underlying HTML, scripts, text, audio clips, video clips and other content that is made available to you on our Website, or has obtained the permission of the owner of the intellectual property in such content to use the content on our Website.
 
 ## Limited Licence
 
-Levine Legal grants to you a limited license to display on your computer, print, download and use the underlying HTML, text, audio clips, video clips and other content that is made available to you on our Website, for non-commercial, personal, or educational purposes only, provided that:
+Levine Law grants to you a limited license to display on your computer, print, download and use the underlying HTML, text, audio clips, video clips and other content that is made available to you on our Website, for non-commercial, personal, or educational purposes only, provided that:
 
 - you do not modify any such content; and
 - you include with and display on each copy of such content the associated copyright notice and this limited license.
@@ -34,7 +34,7 @@ No other use is permitted. Without limiting the generality of the foregoing, you
 - include such content in or with any product that you create or distribute; or
 - copy such content onto your or any other website.
 
-Notwithstanding the above, nothing contained in this licence shall be construed as conferring any right under any copyright of Levine Legal or any other person who owns the copyright in content provided on our Website.
+Notwithstanding the above, nothing contained in this licence shall be construed as conferring any right under any copyright of Levine Law or any other person who owns the copyright in content provided on our Website.
 
 ## No Consultation
 
@@ -42,7 +42,7 @@ Unless and until we specifically agree to consult with you on a specific matter,
 
 ## No Warranties
 
-Levine Legal does not warrant the quality, accuracy or completeness of any information on our Website. Such information is provided "as is" without warranty or condition of any kind. The Website may include inaccuracies or typographical errors. In no event shall Levine Legal be liable for any damages whatsoever, including special, indirect or consequential damages, arising out of or in connection with the use or performance of information available on this Website.
+Levine Law does not warrant the quality, accuracy or completeness of any information on our Website. Such information is provided "as is" without warranty or condition of any kind. The Website may include inaccuracies or typographical errors. In no event shall Levine Law be liable for any damages whatsoever, including special, indirect or consequential damages, arising out of or in connection with the use or performance of information available on this Website.
 
 ## No Endorsement
 
@@ -50,4 +50,4 @@ No endorsement of any third party products or services is expressed or implied b
 
 ## Amendments
 
-Levine Legal retains the right to amend the above conditions at any time, including the right to revoke any permissions.
+Levine Law retains the right to amend the above conditions at any time, including the right to revoke any permissions.

@@ -9,11 +9,11 @@ As a law firm, we collect, use and disclose information on a regular basis in or
 
 This Website Privacy Policy aims to help you understand our personal information collection, use, disclosure and retention practices, specifically as it pertains to this website. By providing personal information to us via this website or by email you agree to the processing set out in this Website Privacy Policy.
 
-This Website Privacy Policy does not apply to, and Levine Legal is not responsible for, any third party websites which may be accessible through links from this website. If you follow a link to any of these third-party websites, they will have their own privacy policies and you will need to check these policies before you submit any personal information to such third-party websites.
+This Website Privacy Policy does not apply to, and Levine Law is not responsible for, any third party websites which may be accessible through links from this website. If you follow a link to any of these third-party websites, they will have their own privacy policies and you will need to check these policies before you submit any personal information to such third-party websites.
 
 ## 1. Who we are and what we do
 
-Levine Legal ("Levine Legal", "we", "us" or "our") is a law firm. Unless we notify you otherwise, we are the "data controller" of your personal information, i.e. the organization who alone or jointly determines the purposes for which, and the manner in which, any personal information is, or is likely to be, processed.
+Levine Law ("Levine Law", "we", "us" or "our") is a law firm. Unless we notify you otherwise, we are the "data controller" of your personal information, i.e. the organization who alone or jointly determines the purposes for which, and the manner in which, any personal information is, or is likely to be, processed.
 
 ## 2. What personal information do we collect
 

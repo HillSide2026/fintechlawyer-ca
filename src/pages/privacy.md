@@ -85,7 +85,7 @@ Our website may use cookies and similar tracking technologies to facilitate use 
 
 ## 9. How to contact us
 
-For any questions or comments about this Privacy Policy or personal information, to make an access or correction request, to exercise any applicable rights, to make a complaint, or to obtain information about our policies and practices, our Privacy Officer can be reached by email at inquiries@levinelegal.ca.
+For any questions or comments about this Privacy Policy or personal information, to make an access or correction request, to exercise any applicable rights, to make a complaint, or to obtain information about our policies and practices, our Privacy Officer can be reached by email at inquiries@levine-law.ca.
 
 ## 10. How we may update this Website Privacy Policy
 

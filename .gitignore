@@ -19,6 +19,10 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# local reference files
+docs/
+vendor/
+
 pnpm-lock.yaml
 
 .astro

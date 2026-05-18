@@ -2,12 +2,9 @@ import { getPermalink, getBlogPermalink } from './utils/permalinks';
 
 export const headerData = {
   links: [
-    { text: 'Insights', href: getBlogPermalink() },
-    { text: 'Payments', href: getPermalink('/payments') },
-    { text: 'Lending', href: getPermalink('/lending') },
-    { text: 'Investment', href: getPermalink('/investment') },
-    { text: 'Insurance', href: getPermalink('/insurance') },
-    { text: 'Infrastructure', href: getPermalink('/infrastructure') },
+    { text: 'Resources', href: getPermalink('/blog') },
+    { text: 'Capabilities', href: getPermalink('/about') },
+    { text: 'Topics', href: getBlogPermalink() },
   ],
   actions: [],
 };

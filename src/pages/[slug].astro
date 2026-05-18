@@ -1,0 +1,61 @@
+---
+import { authorityPages, type AuthorityPage } from '~/data/authorityPages';
+import { pillarPages, type PillarPageData } from '~/data/pillarPages';
+import PageLayout from '~/layouts/PageLayout.astro';
+import AuthorityHero from '~/components/sections/authority/AuthorityHero.astro';
+import AuthorityBody from '~/components/sections/authority/AuthorityBody.astro';
+import AuthorityLinkGrid from '~/components/sections/authority/AuthorityLinkGrid.astro';
+import AuthorityInsightLinks from '~/components/sections/authority/AuthorityInsightLinks.astro';
+import AuthorityRelatedTopics from '~/components/sections/authority/AuthorityRelatedTopics.astro';
+import AuthorityCTA from '~/components/sections/authority/AuthorityCTA.astro';
+import PillarPage from '~/components/sections/pillar/PillarPage.astro';
+
+export function getStaticPaths() {
+  const pillarEntries = Object.values(pillarPages).map((page) => ({
+    params: { slug: page.slug },
+    props: { pageType: 'pillar' as const, pillarPage: page, authorityPage: null },
+  }));
+
+  const pillarSlugs = new Set(Object.keys(pillarPages));
+  const authorityEntries = Object.values(authorityPages)
+    .filter((page) => !pillarSlugs.has(page.slug))
+    .map((page) => ({
+      params: { slug: page.slug },
+      props: { pageType: 'authority' as const, authorityPage: page, pillarPage: null },
+    }));
+
+  return [...pillarEntries, ...authorityEntries];
+}
+
+interface Props {
+  pageType: 'authority' | 'pillar';
+  authorityPage: AuthorityPage | null;
+  pillarPage: PillarPageData | null;
+}
+
+const { pageType, authorityPage, pillarPage } = Astro.props;
+const title = pageType === 'pillar' ? pillarPage!.title : authorityPage!.title;
+const description = pageType === 'pillar' ? pillarPage!.subtitle : authorityPage!.description;
+---
+
+<PageLayout metadata={{ title, description }}>
+  {pageType === 'pillar' && pillarPage && (
+    <PillarPage page={pillarPage} />
+  )}
+  {pageType === 'authority' && authorityPage && (
+    <>
+      <AuthorityHero page={authorityPage} />
+      <AuthorityBody paragraphs={authorityPage.body} />
+      {authorityPage.primaryLinks && authorityPage.primaryLinks.length > 0 && (
+        <AuthorityLinkGrid
+          eyebrow="Topics in this cluster"
+          title="Core areas within this topic."
+          links={authorityPage.primaryLinks}
+        />
+      )}
+      <AuthorityInsightLinks links={authorityPage.insightLinks} />
+      <AuthorityRelatedTopics links={authorityPage.relatedTopics} />
+      <AuthorityCTA title={authorityPage.ctaTitle} text={authorityPage.ctaText} />
+    </>
+  )}
+</PageLayout>

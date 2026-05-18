@@ -1,0 +1,94 @@
+---
+import { Icon } from 'astro-icon/components';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import Button from '~/components/ui/Button.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import type { PillarPageData } from '~/data/pillarPages';
+import { getPermalink } from '~/utils/permalinks';
+
+export interface Props {
+  page: PillarPageData;
+}
+
+const { page } = Astro.props;
+---
+
+<!-- Hero -->
+<section class="relative not-prose bg-brand-gradient text-white">
+  <div class="mx-auto max-w-7xl px-4 md:px-6 py-16 md:py-24 lg:py-28">
+    <div class="max-w-4xl">
+      <p class="mb-4 text-sm font-semibold uppercase tracking-wide text-blue-200">{page.eyebrow}</p>
+      <h1 class="font-heading text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl">
+        {page.title}
+      </h1>
+      <p class="mt-6 max-w-3xl text-lg text-blue-100 md:text-xl">{page.subtitle}</p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <Button variant="primary" href={getPermalink('/contact')} text="Request Consultation" class="bg-white text-[#1D4771] hover:bg-blue-50 border-white" />
+        <Button variant="secondary" href={getPermalink('/login')} text="Client Portal" class="border-white text-white hover:bg-white/10" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Spoke links grid -->
+<WidgetWrapper>
+  <div class="mb-10 max-w-3xl">
+    <h2 class="font-heading text-3xl font-bold leading-tight tracking-tight text-heading md:text-4xl">
+      {page.spokesTitle}
+    </h2>
+    <p class="mt-4 text-lg text-muted">{page.spokesSubtitle}</p>
+  </div>
+  <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    {page.spokes.map((spoke) => (
+      <a
+        class="group flex flex-col border border-gray-200 p-5 transition hover:border-primary dark:border-slate-700"
+        href={spoke.href}
+      >
+        {spoke.icon && (
+          <Icon name={spoke.icon} class="mb-3 h-6 w-6 text-primary" />
+        )}
+        <h3 class="text-lg font-semibold text-heading group-hover:text-primary">{spoke.title}</h3>
+        <p class="mt-2 text-muted">{spoke.description}</p>
+      </a>
+    ))}
+  </div>
+</WidgetWrapper>
+
+<!-- Concepts grid -->
+<WidgetWrapper containerClass="pt-0">
+  <div class="mb-10 max-w-3xl">
+    <h2 class="font-heading text-3xl font-bold leading-tight tracking-tight text-heading md:text-4xl">
+      {page.conceptsTitle}
+    </h2>
+    <p class="mt-4 text-lg text-muted">{page.conceptsSubtitle}</p>
+  </div>
+  <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    {page.concepts.map((concept) => (
+      <article class="border border-gray-200 p-5 dark:border-slate-700">
+        <h3 class="text-lg font-semibold text-heading">{concept.title}</h3>
+        <p class="mt-2 text-muted">{concept.description}</p>
+      </article>
+    ))}
+  </div>
+</WidgetWrapper>
+
+<!-- Latest insights -->
+<BlogLatestPosts
+  title={page.insightsTitle}
+  linkText="View all insights"
+  count={3}
+/>
+
+<!-- CTA -->
+<WidgetWrapper containerClass="py-12 md:py-16 text-center">
+  <div class="mx-auto max-w-3xl">
+    <h2 class="font-heading text-3xl font-bold leading-tight tracking-tight text-heading md:text-4xl">
+      {page.ctaTitle}
+    </h2>
+    <p class="mt-4 text-lg text-muted">{page.ctaSubtitle}</p>
+    <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+      <Button variant="primary" href={getPermalink('/contact')} text="Request Consultation" />
+      <Button variant="secondary" href={getPermalink('/login')} text="Access Portal" />
+    </div>
+  </div>
+</WidgetWrapper>

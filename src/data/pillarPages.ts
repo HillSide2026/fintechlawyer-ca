@@ -20,6 +20,8 @@ export interface PillarPageData {
   spokesTitle: string;
   spokesSubtitle: string;
   spokes: PillarSpoke[];
+  contextHeadline: string;
+  contextText: string;
   conceptsTitle: string;
   conceptsSubtitle: string;
   concepts: PillarConcept[];
@@ -76,6 +78,8 @@ export const pillarPages: Record<string, PillarPageData> = {
         icon: 'tabler:eye',
       },
     ],
+    contextHeadline: 'The structure of your payment product determines your regulatory obligations.',
+    contextText: 'FINTRAC registration, banking access, and compliance design all follow from how funds move and who controls them at each step.',
     conceptsTitle: 'Payment product models in Canada',
     conceptsSubtitle: 'Regulatory analysis depends on the specific role the product plays in moving or handling funds.',
     concepts: [
@@ -144,6 +148,8 @@ export const pillarPages: Record<string, PillarPageData> = {
         icon: 'tabler:book',
       },
     ],
+    contextHeadline: 'Lending in Canada is provincially regulated — and the lines are blurrier than most teams expect.',
+    contextText: 'Whether a product is characterized as credit, factoring, or a service arrangement affects disclosure obligations, licensing exposure, and partner risk.',
     conceptsTitle: 'Lending product models in Canada',
     conceptsSubtitle: 'Regulatory analysis depends on who provides capital, who interfaces with the borrower, and how repayment flows.',
     concepts: [
@@ -206,6 +212,8 @@ export const pillarPages: Record<string, PillarPageData> = {
         icon: 'tabler:book',
       },
     ],
+    contextHeadline: 'Investment platforms in Canada engage provincial securities regimes before they engage customers.',
+    contextText: 'Registration category, available exemptions, and custody structure determine what your platform can do and who you need onside before launch.',
     conceptsTitle: 'Investment product models in Canada',
     conceptsSubtitle: 'Regulatory path depends on whether the platform facilitates trading, provides advice, manages assets, or holds client funds.',
     concepts: [
@@ -274,6 +282,8 @@ export const pillarPages: Record<string, PillarPageData> = {
         icon: 'tabler:building-bank',
       },
     ],
+    contextHeadline: 'Infrastructure companies often carry regulatory exposure they did not design for.',
+    contextText: 'Role allocation in the transaction chain — not direct customer contact — determines who bears FINTRAC obligations, banking risk, and contractual liability.',
     conceptsTitle: 'Infrastructure models in Canada',
     conceptsSubtitle: 'Responsibilities are distributed across multiple entities — the key question is who bears regulated activity and how.',
     concepts: [
@@ -355,6 +365,8 @@ export const pillarPages: Record<string, PillarPageData> = {
         icon: 'tabler:arrows-exchange',
       },
     ],
+    contextHeadline: 'Dealing in virtual currency is a defined regulatory trigger under Canadian law.',
+    contextText: 'FINTRAC registration requirements apply regardless of whether your product looks like a traditional financial service — the statutory definition controls.',
     conceptsTitle: 'Crypto product models in Canada',
     conceptsSubtitle: 'Regulatory analysis depends on the specific role the product plays — whether it deals in virtual currency, facilitates trading, or holds assets on behalf of others.',
     concepts: [

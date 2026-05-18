@@ -308,76 +308,85 @@ export const pillarPages: Record<string, PillarPageData> = {
       'Use fintechlawyer.ca to understand the Canadian rules, risks, and market context behind financial infrastructure — or request a consultation.',
   },
 
-  insights: {
-    slug: 'insights',
-    eyebrow: 'Fintech Insights',
-    title: 'Fintech legal intelligence for innovators and operators in Canada.',
+  crypto: {
+    slug: 'crypto',
+    eyebrow: 'Crypto Fintech',
+    title: 'Fintech legal intelligence for crypto innovators and operators in Canada.',
     subtitle:
-      'Practical legal and regulatory information on MSB registration, FINTRAC compliance, payment structuring, and regulatory issues for Canadian fintech companies.',
-    spokesTitle: 'Topics covered',
-    spokesSubtitle: 'Analysis organised by the regulatory and legal topics most relevant to fintech founders, operators, and product teams.',
+      'Practical legal and regulatory information for crypto product teams navigating virtual currency rules, FINTRAC obligations, securities law analysis, and banking relationships in Canada.',
+    spokesTitle: 'Topics within this pillar',
+    spokesSubtitle:
+      'Crypto and digital asset businesses engage multiple Canadian regulatory regimes. These topics cover the issues most relevant to crypto product teams.',
     spokes: [
       {
+        title: 'FINTRAC/MSB Hub',
+        description: 'The central map for MSB registration, FINTRAC compliance, and virtual currency regulatory issues.',
+        href: getPermalink('/fintrac-compliance'),
+        icon: 'tabler:building-bank',
+      },
+      {
         title: 'MSB Registration',
-        description: 'Timing, sequencing, and planning issues for Canadian MSB registration.',
+        description: 'When crypto companies are required to register as a money services business in Canada.',
         href: getPermalink('/msb-registration-canada'),
         icon: 'tabler:clipboard-list',
       },
       {
         title: 'FINTRAC Compliance',
-        description: 'Practical overview of FINTRAC compliance obligations for registered MSBs.',
+        description: 'AML obligations, controls, records, reporting, and governance for virtual currency dealers.',
         href: getPermalink('/fintrac-compliance-canada'),
         icon: 'tabler:shield-check',
       },
       {
-        title: 'Payments',
-        description: 'Legal and regulatory context for payment products, wallets, and money movement.',
-        href: getPermalink('/payments'),
+        title: 'Suspicious Transaction Reports',
+        description: 'How STR obligations apply to crypto transactions and exchange operations.',
+        href: getPermalink('/suspicious-transaction-reports-canada'),
+        icon: 'tabler:eye',
+      },
+      {
+        title: 'MSB Banking Risk',
+        description: 'Banking access, processor relationships, and de-risking issues for crypto companies.',
+        href: getPermalink('/msb-banking-risk-canada'),
+        icon: 'tabler:alert-triangle',
+      },
+      {
+        title: 'Payment Structuring',
+        description: 'How fund flows and product architecture affect regulatory treatment for crypto products.',
+        href: getPermalink('/payment-structuring-canada'),
         icon: 'tabler:arrows-exchange',
       },
-      {
-        title: 'Lending',
-        description: 'Legal and regulatory issues for consumer credit and fintech lending models.',
-        href: getPermalink('/lending'),
-        icon: 'tabler:building-bank',
-      },
-      {
-        title: 'Investment',
-        description: 'Market structure and regulatory issues for investment platforms.',
-        href: getPermalink('/investment'),
-        icon: 'tabler:chart-line',
-      },
-      {
-        title: 'Infrastructure',
-        description: 'Regulatory context for BaaS, APIs, embedded finance, and platform partners.',
-        href: getPermalink('/infrastructure'),
-        icon: 'tabler:server',
-      },
     ],
-    conceptsTitle: 'How these insights are organised',
-    conceptsSubtitle: 'Each insight connects to a topic cluster — practical analysis linked to the authority pages that provide deeper regulatory context.',
+    conceptsTitle: 'Crypto product models in Canada',
+    conceptsSubtitle: 'Regulatory analysis depends on the specific role the product plays — whether it deals in virtual currency, facilitates trading, or holds assets on behalf of others.',
     concepts: [
       {
-        title: 'Regulatory intelligence',
-        description: 'Analysis of Canadian regulatory frameworks, enforcement trends, and compliance design relevant to fintech products.',
+        title: 'Crypto exchanges',
+        description: 'Platforms facilitating the buying, selling, or trading of virtual currency are subject to MSB registration and FINTRAC obligations as virtual currency dealers.',
       },
       {
-        title: 'Product and structure analysis',
-        description: 'How product design, fund flows, and partner roles affect regulatory treatment and legal risk.',
+        title: 'Custody and safekeeping',
+        description: 'Holding virtual currency on behalf of clients raises questions about registration, insurance, and operational safeguards.',
       },
       {
-        title: 'Practical guidance',
-        description: 'Actionable context for founders, operators, and product teams making decisions where legal and regulatory issues arise.',
+        title: 'Stablecoins',
+        description: 'Stablecoin issuance and redemption may engage MSB definitions as well as evolving payment and securities frameworks depending on design.',
       },
       {
-        title: 'Market intelligence',
-        description: 'Awareness of enforcement outcomes, market practice, and regulatory signals relevant to Canadian fintech.',
+        title: 'DeFi and protocol products',
+        description: 'Decentralized protocols that facilitate financial transactions raise unsettled questions about regulatory perimeter and who bears regulatory responsibility.',
+      },
+      {
+        title: 'NFTs and tokenization',
+        description: 'Token-based products vary widely in structure — securities law analysis and FINTRAC treatment depend on the specific design and use case.',
+      },
+      {
+        title: 'Blockchain infrastructure',
+        description: 'Infrastructure providers enabling crypto products may carry regulatory exposure depending on their role in the transaction chain and custody of assets.',
       },
     ],
-    insightsTitle: 'Latest insights',
-    ctaTitle: 'Need a practical legal and regulatory map?',
+    insightsTitle: 'Practical analysis on crypto',
+    ctaTitle: 'Need legal and regulatory clarity on your crypto product?',
     ctaSubtitle:
-      'Use fintechlawyer.ca to understand the Canadian rules, risks, and market context behind fintech products — or request a consultation.',
+      'Use fintechlawyer.ca to understand the Canadian rules, risks, and market context behind crypto products — or request a consultation.',
   },
 };
 

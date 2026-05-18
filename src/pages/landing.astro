@@ -1,0 +1,191 @@
+---
+import PageLayout from '~/layouts/PageLayout.astro';
+import { getPermalink } from '~/utils/permalinks';
+
+const metadata = {
+  title: 'Fintech Lawyer — Legal support and systems for fintech innovators',
+  description: 'Practical corporate, contract, and regulatory counsel for companies operating where legal matters.',
+};
+---
+
+<PageLayout metadata={metadata}>
+  <!-- Hero -->
+  <section class="relative not-prose bg-brand-gradient text-white">
+    <div class="mx-auto max-w-7xl px-4 md:px-6 py-20 md:py-28 lg:py-32">
+      <div class="max-w-3xl">
+        <p class="mb-4 text-sm font-semibold uppercase tracking-wide text-blue-200">Financial Technology Law</p>
+        <h1 class="font-heading text-5xl font-bold leading-tight tracking-tight md:text-6xl">
+          Legal support and systems for fintech innovators.
+        </h1>
+        <p class="mt-6 max-w-2xl text-xl text-blue-100">
+          Practical corporate, contract, and regulatory counsel for companies operating where legal matters.
+        </p>
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+          <a
+            href={getPermalink('/contact')}
+            class="inline-block bg-white px-8 py-4 text-sm font-bold text-[#1D4771] hover:bg-blue-50 transition"
+          >
+            Talk with Us
+          </a>
+          <a
+            href={getPermalink('/login')}
+            class="inline-block border border-white px-8 py-4 text-sm font-bold text-white hover:bg-white/10 transition"
+          >
+            Client Portal
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <section id="capabilities" class="border-b border-gray-200 dark:border-slate-700">
+    <div class="mx-auto max-w-7xl px-4 md:px-6 py-14 md:py-20">
+      <div class="mb-10 max-w-3xl">
+        <h2 class="font-heading text-3xl font-bold leading-tight tracking-tight text-heading md:text-4xl">
+          Resources for businesses to scale.
+        </h2>
+        <p class="mt-4 text-lg text-muted">
+          Legal and regulatory support across the areas that matter most to fintech founders and operators.
+        </p>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {[
+          {
+            title: 'Corporate & Governance Structures',
+            description: 'Corporate records, ownership, and decision-making frameworks aligned with how the business actually operates.',
+          },
+          {
+            title: 'Regulatory Strategy',
+            description: 'Navigate licensing, compliance, and regulatory risk across Canadian frameworks with clear, actionable guidance.',
+          },
+          {
+            title: 'MSB Registration & FINTRAC',
+            description: 'When registration is required, what compliance obligations follow, and how to build programs that work.',
+          },
+          {
+            title: 'Payment Structuring',
+            description: 'How product architecture, fund flows, and partner roles shape regulatory treatment for payment products.',
+          },
+          {
+            title: 'Crypto & Digital Assets',
+            description: 'Guidance on virtual currency regulation, token design, and the evolving regulatory framework for digital assets in Canada.',
+          },
+          {
+            title: 'Commercial Contracts',
+            description: 'Drafting and negotiating agreements with partners, vendors, financial institutions, and technology providers.',
+          },
+        ].map((item) => (
+          <article class="border border-gray-200 p-6 dark:border-slate-700">
+            <h3 class="text-lg font-semibold text-heading">{item.title}</h3>
+            <p class="mt-2 text-muted">{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Engagements -->
+  <section id="engagements" class="border-b border-gray-200 dark:border-slate-700">
+    <div class="mx-auto max-w-7xl px-4 md:px-6 py-14 md:py-20">
+      <div class="mb-10 max-w-3xl">
+        <h2 class="font-heading text-3xl font-bold leading-tight tracking-tight text-heading md:text-4xl">
+          Topics covered on fintechlawyer.ca
+        </h2>
+        <p class="mt-4 text-lg text-muted">
+          Regulatory and legal analysis organised by the issues most relevant to Canadian fintech companies.
+        </p>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {[
+          { title: 'Payments', href: '/payments', description: 'Payment products, wallets, money movement, and Canadian regulatory treatment.' },
+          { title: 'Lending', href: '/lending', description: 'Consumer credit, business financing, and fintech lending structures in Canada.' },
+          { title: 'Investment', href: '/investment', description: 'Investment platforms, securities law, and registration requirements.' },
+          { title: 'Infrastructure', href: '/infrastructure', description: 'BaaS, APIs, embedded finance, and role allocation across fintech stacks.' },
+          { title: 'Crypto', href: '/crypto', description: 'Virtual currency regulation, FINTRAC obligations, and digital asset frameworks.' },
+          { title: 'Insights', href: '/blog', description: 'Practical analysis on Canadian fintech regulation and regulatory developments.' },
+        ].map((item) => (
+          <a
+            class="group flex flex-col border border-gray-200 p-5 transition hover:border-primary dark:border-slate-700"
+            href={getPermalink(item.href)}
+          >
+            <h3 class="text-lg font-semibold text-heading group-hover:text-primary">{item.title}</h3>
+            <p class="mt-2 text-muted">{item.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how-it-works" class="border-b border-gray-200 dark:border-slate-700">
+    <div class="mx-auto max-w-7xl px-4 md:px-6 py-14 md:py-20">
+      <div class="mb-10 max-w-3xl">
+        <h2 class="font-heading text-3xl font-bold leading-tight tracking-tight text-heading md:text-4xl">
+          How we work.
+        </h2>
+        <p class="mt-4 text-lg text-muted">
+          Legal precision combined with practical speed, delivering advice that is both rigorous and actionable.
+        </p>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2">
+        {[
+          {
+            step: '01',
+            title: 'Business-first thinking',
+            description: 'Legal advice grounded in real operational and growth needs, not abstract legal theory.',
+          },
+          {
+            step: '02',
+            title: 'Clarity over complexity',
+            description: 'We simplify complex regulations into clear decisions and next steps your team can act on.',
+          },
+          {
+            step: '03',
+            title: 'Speed and responsiveness',
+            description: 'Fast-moving teams need fast-moving legal support. We keep pace with your product cycle.',
+          },
+          {
+            step: '04',
+            title: 'Integrity and compliance',
+            description: 'We prioritize long-term sustainability, not shortcuts that create future regulatory risk.',
+          },
+        ].map((item) => (
+          <div class="flex gap-5">
+            <div class="flex-shrink-0 text-2xl font-bold text-primary/30">{item.step}</div>
+            <div>
+              <h3 class="text-lg font-semibold text-heading">{item.title}</h3>
+              <p class="mt-1 text-muted">{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-brand-gradient text-white">
+    <div class="mx-auto max-w-7xl px-4 md:px-6 py-14 md:py-20 text-center">
+      <h2 class="font-heading text-3xl font-bold leading-tight tracking-tight md:text-4xl">
+        Ready to get started?
+      </h2>
+      <p class="mt-4 text-lg text-blue-100">
+        Contact Levine Legal to discuss your regulatory situation or request a consultation.
+      </p>
+      <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+        <a
+          href={getPermalink('/contact')}
+          class="inline-block bg-white px-8 py-4 text-sm font-bold text-[#1D4771] hover:bg-blue-50 transition"
+        >
+          Request Consultation
+        </a>
+        <a
+          href={getPermalink('/login')}
+          class="inline-block border border-white px-8 py-4 text-sm font-bold text-white hover:bg-white/10 transition"
+        >
+          Client Portal
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

@@ -1,228 +1,131 @@
 ---
-import Features2 from '~/components/widgets/Features2.astro';
-import Features3 from '~/components/widgets/Features3.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import Steps2 from '~/components/widgets/Steps2.astro';
-import Layout from '~/layouts/PageLayout.astro';
+import PageLayout from '~/layouts/PageLayout.astro';
+import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
-  title: 'About FintechLawyer',
+  title: 'About — fintechlawyer.ca',
+  description: 'fintechlawyer.ca is a Canadian fintech legal intelligence resource operated by Levine Legal. Practical regulatory and legal analysis for fintech founders and operators.',
 };
 ---
 
-<Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+<PageLayout metadata={metadata}>
+  <!-- Hero -->
+  <section class="relative not-prose bg-brand-gradient text-white">
+    <div class="mx-auto max-w-7xl px-4 md:px-6 py-16 md:py-24 lg:py-28">
+      <div class="max-w-3xl">
+        <p class="mb-4 text-sm font-semibold uppercase tracking-wide text-blue-200">About</p>
+        <h1 class="font-heading text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl">
+          Practical legal intelligence for Canadian fintech.
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg text-blue-100 md:text-xl">
+          fintechlawyer.ca provides regulatory and legal analysis for fintech founders, operators, and product teams navigating the Canadian regulatory environment.
+        </p>
+      </div>
+    </div>
+  </section>
 
-  <Hero
-    tagline="About FintechLawyer"
-    image={{
-      src: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Caos Image',
-    }}
-  >
-    <Fragment slot="title">
-      Legal Infrastructure for Modern Fintech Companies
-    </Fragment>
+  <!-- About the resource -->
+  <section class="mx-auto max-w-7xl px-4 md:px-6 py-14 md:py-20">
+    <div class="grid gap-12 md:grid-cols-2 md:gap-16">
+      <div>
+        <h2 class="font-heading text-3xl font-bold leading-tight tracking-tight text-heading">
+          What fintechlawyer.ca is
+        </h2>
+        <p class="mt-4 text-lg text-muted">
+          fintechlawyer.ca is a legal intelligence resource focused on Canadian fintech regulation. It covers the regulatory frameworks most relevant to payment companies, lenders, investment platforms, infrastructure providers, and crypto businesses operating in Canada.
+        </p>
+        <p class="mt-4 text-lg text-muted">
+          The site maps regulatory issues across five content pillars — payments, lending, investment, infrastructure, and crypto — with practical analysis written for founders and operators, not just lawyers.
+        </p>
+        <p class="mt-4 text-lg text-muted">
+          Content covers MSB registration, FINTRAC compliance, payment structuring, banking relationships, suspicious transaction reporting, and the legal frameworks governing Canadian fintech products.
+        </p>
+      </div>
+      <div>
+        <h2 class="font-heading text-3xl font-bold leading-tight tracking-tight text-heading">
+          About Levine Legal
+        </h2>
+        <p class="mt-4 text-lg text-muted">
+          fintechlawyer.ca is operated by Levine Legal. Matthew Levine advises entrepreneurs and executives on corporate structures, transactions, and financing matters.
+        </p>
+        <p class="mt-4 text-lg text-muted">
+          Whether you are an entrepreneur navigating early-stage financing or an executive at an established business, Levine Legal has the experience and expertise to deliver the corporate law solutions your situation requires.
+        </p>
+        <p class="mt-4 text-lg text-muted">
+          The firm advises fintech companies on regulatory strategy, MSB registration, FINTRAC compliance, payment product structuring, securities law questions, and commercial contracts with financial institution partners.
+        </p>
+      </div>
+    </div>
+  </section>
 
-    <Fragment slot="subtitle">
-      FintechLawyer helps founders and operators navigate regulatory complexity with clarity and confidence. From early-stage structuring to scaling across jurisdictions, we provide practical, business-first legal guidance built for fast-moving teams.
-    </Fragment>
-  </Hero>
+  <!-- What we cover -->
+  <section class="border-t border-gray-200 dark:border-slate-700">
+    <div class="mx-auto max-w-7xl px-4 md:px-6 py-14 md:py-20">
+      <div class="mb-10 max-w-3xl">
+        <h2 class="font-heading text-3xl font-bold leading-tight tracking-tight text-heading md:text-4xl">
+          Regulatory coverage
+        </h2>
+        <p class="mt-4 text-lg text-muted">
+          fintechlawyer.ca covers the regulatory issues that matter most to Canadian fintech teams.
+        </p>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {[
+          { title: 'MSB Registration', description: 'When Canadian fintech companies are required to register as a money services business with FINTRAC.' },
+          { title: 'FINTRAC Compliance', description: 'AML program requirements, recordkeeping, reporting obligations, and governance for registered MSBs.' },
+          { title: 'Payment Structuring', description: 'How product architecture, fund flows, and partner roles shape regulatory treatment for payment products.' },
+          { title: 'Banking and De-risking', description: 'Banking access, sponsor relationships, and the practical risk issues facing payment and crypto companies.' },
+          { title: 'Suspicious Transaction Reports', description: 'STR obligations, how they connect to product operations, and the compliance design questions they raise.' },
+          { title: 'Crypto and Virtual Currency', description: 'FINTRAC obligations for virtual currency dealers, securities law analysis, and the regulatory framework for digital assets in Canada.' },
+        ].map((item) => (
+          <article class="border border-gray-200 p-5 dark:border-slate-700">
+            <h3 class="text-lg font-semibold text-heading">{item.title}</h3>
+            <p class="mt-2 text-muted">{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
-  <!-- Stats Widget ****************** -->
-
-  <Stats
-    title="Trusted by High-Growth Teams"
-    stats={[
-      { title: 'Clients Advised', amount: '200+' },
-      { title: 'Jurisdictions Covered', amount: '15+' },
-      { title: 'Transactions Supported', amount: '$500M+' },
-      { title: 'Years in Practice', amount: '10+' },
-    ]}
-  />
-
-  <!-- Features3 Widget ************** -->
-
-  <Features3
-    title="What We Do"
-    subtitle="Specialized legal services designed for fintech innovators, operators and digital financial products."
-    columns={3}
-    isBeforeContent={true}
-    items={[
-      {
-        title: 'Regulatory Strategy',
-        description:
-          'Navigate licensing, compliance, and regulatory risk across multiple jurisdictions with clear, actionable guidance.',
-        icon: 'tabler:scale',
-      },
-      {
-        title: 'Fintech Structuring',
-        description:
-          'Build the right legal foundation for payments, lending, crypto, and embedded finance products.',
-        icon: 'tabler:building-bank',
-      },
-      {
-        title: 'Securities & Fundraising',
-        description:
-          'Support for SAFE, equity rounds, token offerings, and investor documentation.',
-        icon: 'tabler:chart-line',
-      },
-    ]}
-  />
-
-  <!-- Features3 Widget ************** -->
-
-  <Features3
-    columns={3}
-    isAfterContent={true}
-    items={[
-      {
-        title: 'Payments & Money Services',
-        description:
-          'Advising on MSB registration, payment flows, and partnerships with financial institutions.',
-        icon: 'tabler:credit-card',
-      },
-      {
-        title: 'Crypto & Web3',
-        description:
-          'Guidance on token design, compliance frameworks, and evolving regulatory expectations.',
-        icon: 'tabler:currency-bitcoin',
-      },
-      {
-        title: 'Commercial Contracts',
-        description:
-          'Drafting and negotiating agreements with partners, vendors, and financial institutions.',
-        icon: 'tabler:file-text',
-      },
-      {
-        title: 'Privacy & Data Protection',
-        description:
-          'Ensure compliance with GDPR, PIPEDA, and global data frameworks.',
-        icon: 'tabler:lock',
-      },
-      {
-        title: 'Ongoing Legal Support',
-        description:
-          'Acting as fractional counsel for growing fintech companies.',
-        icon: 'tabler:briefcase',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Colorful Image',
-    }}
-  />
-
-  <!-- Steps2 Widget ****************** -->
-
-  <Steps2
-    title="How We Work"
-    subtitle="We combine legal precision with digital speed, delivering advice that is both rigorous and practical."
-    items={[
-      {
-        title: 'Business-First Thinking',
-        description:
-          'Legal advice grounded in real operational and growth needs.',
-      },
-      {
-        title: 'Clarity Over Complexity',
-        description:
-          'We simplify complex regulations into clear decisions and next steps.',
-      },
-      {
-        title: 'Speed & Responsiveness',
-        description:
-          'Fast-moving teams need fast-moving legal support. We keep pace.',
-      },
-      {
-        title: 'Integrity & Compliance',
-        description:
-          'We prioritize long-term sustainability, not shortcuts that create future risk.',
-      },
-    ]}
-  />
-
-  <!-- Steps2 Widget ****************** -->
-
-  <Steps2
-    title="Proven Experience"
-    subtitle="A track record of supporting fintech companies from launch to scale."
-    isReversed={true}
-    callToAction={{
-      text: 'View Case Studies',
-      href: '/',
-    }}
-    items={[
-      {
-        title: 'Global Client Base',
-        description: 'Advising startups and platforms operating across North America, Europe, and beyond.',
-        icon: 'tabler:globe',
-      },
-      {
-        title: 'Strong Founder Relationships',
-        description:
-          'Long-term partnerships with repeat clients and referrals.',
-        icon: 'tabler:message-star',
-      },
-      {
-        title: 'Recognized Expertise',
-        description:
-          'Deep specialization in fintech, payments, and emerging financial technologies.',
-        icon: 'tabler:award',
-      },
-    ]}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Where We Operate"
-    tagline="Global Reach"
-    columns={4}
-    items={[
-      {
-        title: 'Ontario (HQ)',
-        description: 'Toronto',
-      },
-      {
-        title: 'British Columbia',
-        description: 'Vancouver',
-      },
-      {
-        title: 'LatAm',
-        description: 'Brazil',
-      },
-      {
-        title: 'Europe',
-        description: 'London',
-      },
-      {
-        title: 'APAC',
-        description: 'Tokyo',
-      },
-    ]}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Speak with a Fintech Lawyer"
-    tagline="Contact"
-    columns={2}
-    items={[
-      {
-        title: 'Schedule a Consultation',
-        description:
-          'Book time to discuss your product, structure, or regulatory questions.',
-        icon: 'tabler:calendar',
-      },
-      {
-        title: 'Email Us',
-        description:
-          'Reach out for general inquiries or partnership opportunities.',
-        icon: 'tabler:mail',
-      },
-    ]}
-  />
-</Layout>
+  <!-- Contact -->
+  <section class="border-t border-gray-200 dark:border-slate-700">
+    <div class="mx-auto max-w-7xl px-4 md:px-6 py-14 md:py-20">
+      <div class="grid gap-10 md:grid-cols-2">
+        <div>
+          <h2 class="font-heading text-3xl font-bold leading-tight tracking-tight text-heading">
+            Contact Levine Legal
+          </h2>
+          <p class="mt-4 text-lg text-muted">
+            To discuss your regulatory situation or request a consultation, contact us directly.
+          </p>
+          <p class="mt-6 text-sm text-muted italic">
+            Disclaimer: No lawyer-client relationship is created by this website or by communicating with us through this website.
+          </p>
+        </div>
+        <div class="space-y-4">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-wide text-muted">Address</p>
+            <p class="mt-1 text-heading">1235 Bay Street, Suite 700</p>
+            <p class="text-heading">Toronto, ON M5R 3K4</p>
+          </div>
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-wide text-muted">Email</p>
+            <a href="mailto:inquiries@levinelegal.ca" class="mt-1 text-primary hover:underline">inquiries@levinelegal.ca</a>
+          </div>
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-wide text-muted">Phone</p>
+            <a href="tel:6472982598" class="mt-1 text-primary hover:underline">647 298 2598</a>
+          </div>
+          <div class="pt-2">
+            <a
+              href={getPermalink('/contact')}
+              class="inline-block bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary/90 transition"
+            >
+              Send a message
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

@@ -1,41 +1,123 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
-import ContactUs from '~/components/widgets/Contact.astro';
+import PageLayout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'Contact',
+  title: 'Contact — fintechlawyer.ca',
+  description: 'Contact Levine Legal to discuss your fintech regulatory situation or request a consultation.',
 };
 ---
 
-<Layout metadata={metadata}>
-  <!-- HeroText Widget ******************* -->
+<PageLayout metadata={metadata}>
+  <!-- Hero -->
+  <section class="relative not-prose bg-brand-gradient text-white">
+    <div class="mx-auto max-w-7xl px-4 md:px-6 py-16 md:py-20">
+      <div class="max-w-3xl">
+        <p class="mb-4 text-sm font-semibold uppercase tracking-wide text-blue-200">Contact</p>
+        <h1 class="font-heading text-4xl font-bold leading-tight tracking-tight md:text-5xl">
+          Request a consultation.
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg text-blue-100">
+          Use the form below to get in touch with Levine Legal about your regulatory situation, product question, or engagement inquiry.
+        </p>
+      </div>
+    </div>
+  </section>
 
-  <HeroText tagline="Contact" title="Let's Connect!" />
+  <section class="mx-auto max-w-7xl px-4 md:px-6 py-14 md:py-20">
+    <div class="grid gap-12 md:grid-cols-2 md:gap-16">
 
-  <ContactUs
-    id="form"
-    title="Drop us a message today!"
-    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
-    inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-      },
-    ]}
-    textarea={{
-      label: 'Message',
-    }}
-    disclaimer={{
-      label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
-    }}
-    description="Our support team typically responds within 24 business hours."
-  />
-</Layout>
+      <!-- Contact details -->
+      <div>
+        <h2 class="font-heading text-2xl font-bold leading-tight tracking-tight text-heading">
+          Levine Legal
+        </h2>
+        <p class="mt-4 text-muted">
+          Matthew Levine advises entrepreneurs and executives on corporate structures, transactions, and financing matters. The firm advises fintech companies on regulatory strategy, MSB registration, FINTRAC compliance, and payment product structuring.
+        </p>
+
+        <div class="mt-8 space-y-5">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-wide text-muted">Address</p>
+            <p class="mt-1 text-heading">1235 Bay Street, Suite 700</p>
+            <p class="text-heading">Toronto, ON M5R 3K4</p>
+          </div>
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-wide text-muted">Email</p>
+            <a href="mailto:inquiries@levinelegal.ca" class="mt-1 inline-block text-primary hover:underline">
+              inquiries@levinelegal.ca
+            </a>
+          </div>
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-wide text-muted">Phone</p>
+            <a href="tel:6472982598" class="mt-1 inline-block text-primary hover:underline">
+              647 298 2598
+            </a>
+          </div>
+        </div>
+
+        <p class="mt-8 text-sm text-muted italic">
+          Disclaimer: No lawyer-client relationship is created by this website or by communicating with us through this website.
+        </p>
+      </div>
+
+      <!-- Contact form -->
+      <div>
+        <form
+          name="contact"
+          method="POST"
+          action="/contact-success"
+          class="space-y-5"
+        >
+          <div>
+            <label for="name" class="block text-sm font-semibold text-heading">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              class="mt-1 block w-full border border-gray-300 px-4 py-3 text-sm text-heading focus:border-primary focus:outline-none dark:border-slate-600 dark:bg-slate-800"
+            />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-semibold text-heading">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="mt-1 block w-full border border-gray-300 px-4 py-3 text-sm text-heading focus:border-primary focus:outline-none dark:border-slate-600 dark:bg-slate-800"
+            />
+          </div>
+          <div>
+            <label for="company" class="block text-sm font-semibold text-heading">Company <span class="font-normal text-muted">(optional)</span></label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              class="mt-1 block w-full border border-gray-300 px-4 py-3 text-sm text-heading focus:border-primary focus:outline-none dark:border-slate-600 dark:bg-slate-800"
+            />
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-semibold text-heading">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows={5}
+              required
+              class="mt-1 block w-full border border-gray-300 px-4 py-3 text-sm text-heading focus:border-primary focus:outline-none dark:border-slate-600 dark:bg-slate-800"
+            ></textarea>
+          </div>
+          <p class="text-xs text-muted">
+            By submitting this form, you acknowledge that no lawyer-client relationship is created by communicating with us through this website.
+          </p>
+          <button
+            type="submit"
+            class="inline-block bg-primary px-8 py-3 text-sm font-semibold text-white hover:bg-primary/90 transition"
+          >
+            Send message
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+</PageLayout>
